@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Asistencia</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>🏋️ GymManager SixSeven 6767</h2>
+
+<a href="/inicio">🏠 Inicio</a>
+<a href="/alumnos">👥 Alumnos</a>
+<a href="/rutinas">💪 Rutinas</a>
+<a href="/asistencia">📅 Asistencia</a>
+<a href="/logout">🚪 Cerrar sesión</a>
+
+</div>
+
+<div class="contenido">
+
+<h1>Registro de asistencia</h1>
+
+<a href="/agregar_asistencia">
+
+<button class="agregar">
+
+➕ Registrar asistencia
+
+</button>
+
+</a>
+
+<br><br>
+
+<form method="GET">
+
+<input
+type="text"
+name="buscar"
+placeholder="Buscar alumno"
+value="{{ buscar }}">
+
+<button>
+
+🔍 Buscar
+
+</button>
+
+</form>
+
+<br>
+
+<table class="tabla">
+
+<tr>
+
+<th>ID</th>
+
+<th>Alumno</th>
+
+<th>Fecha</th>
+
+<th>Hora</th>
+
+<th>Estado</th>
+
+<th>Acciones</th>
+
+</tr>
+
+{% for registro in asistencia %}
+
+<tr>
+
+<td>{{ registro.id }}</td>
+
+<td>{{ registro.nombre }}</td>
+
+<td>{{ registro.fecha }}</td>
+
+<td>{{ registro.hora }}</td>
+
+<td>{{ registro.estado }}</td>
+
+<td>
+
+<a href="/editar_asistencia/{{ registro.id }}">
+
+<button class="editar">
+
+✏️
+
+</button>
+
+</a>
+
+<a href="/eliminar_asistencia/{{ registro.id }}">
+
+<button class="eliminar">
+
+🗑️
+
+</button>
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+
+</html>

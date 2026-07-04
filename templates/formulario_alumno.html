@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="contenido">
+
+    <h1>{{ titulo }}</h1>
+
+    <form method="POST">
+
+        <h2>Datos personales</h2>
+
+        <label>Nombre completo</label>
+        <input type="text" name="nombre"
+               value="{{ alumno.nombre if alumno else '' }}" required>
+
+        <label>Edad</label>
+        <input type="number" name="edad"
+               value="{{ alumno.edad if alumno else '' }}" required>
+
+        <label>DNI</label>
+        <input type="text" name="dni"
+               value="{{ alumno.dni if alumno else '' }}">
+
+        <label>Teléfono</label>
+        <input type="text" name="telefono"
+               value="{{ alumno.telefono if alumno else '' }}">
+
+        <label>Email</label>
+        <input type="email" name="email"
+               value="{{ alumno.email if alumno else '' }}">
+
+        <hr>
+
+        <h2>Datos físicos</h2>
+
+        <label>Altura (m)</label>
+        <input type="number"
+               step="0.01"
+               name="altura"
+               value="{{ alumno.altura if alumno else '' }}">
+
+        <label>Peso (kg)</label>
+        <input type="number"
+               step="0.1"
+               name="peso"
+               value="{{ alumno.peso if alumno else '' }}"
+               required>
+
+        <hr>
+
+        <h2>Información del gimnasio</h2>
+
+        <label>Objetivo</label>
+        <input type="text"
+               name="objetivo"
+               value="{{ alumno.objetivo if alumno else '' }}"
+               required>
+
+        <label>Plan</label>
+
+        <select name="plan">
+
+            <option value="Básico"
+            {% if alumno and alumno.plan=="Básico" %}selected{% endif %}>
+                Básico
+            </option>
+
+            <option value="Premium"
+            {% if alumno and alumno.plan=="Premium" %}selected{% endif %}>
+                Premium
+            </option>
+
+            <option value="VIP"
+            {% if alumno and alumno.plan=="VIP" %}selected{% endif %}>
+                VIP
+            </option>
+
+        </select>
+
+        <label>Estado</label>
+
+        <select name="estado">
+
+            <option value="Activo"
+            {% if alumno and alumno.estado=="Activo" %}selected{% endif %}>
+                Activo
+            </option>
+
+            <option value="Inactivo"
+            {% if alumno and alumno.estado=="Inactivo" %}selected{% endif %}>
+                Inactivo
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <button class="agregar" type="submit">
+
+            Guardar Alumno
+
+        </button>
+
+        <a href="/alumnos">
+
+            <button type="button">
+
+                Cancelar
+
+            </button>
+
+        </a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

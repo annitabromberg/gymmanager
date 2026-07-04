@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "alumno": "pepito",
+        "lunes": "Gluteo",
+        "martes": "Espalda",
+        "miercoles": "Pierna completa",
+        "jueves": "Pecho y ticeps",
+        "viernes": "Gluteo y cardio"
+    },
+    {
+        "id": 2,
+        "alumno": "Sofi",
+        "lunes": "Gluteo",
+        "martes": "Espalda",
+        "miercoles": "",
+        "jueves": "Pecho y ticeps",
+        "viernes": "Gluteo y cardio"
+    }
+]

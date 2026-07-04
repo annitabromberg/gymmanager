@@ -1,0 +1,327 @@
+/* =========================
+   GYM MANAGER - STYLE
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#333;
+}
+
+/* ===== MENÚ LATERAL ===== */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100%;
+    background:#1f2937;
+    color:white;
+    padding:25px;
+}
+
+.sidebar h2{
+    text-align:center;
+    margin-bottom:40px;
+    font-size:24px;
+}
+
+.sidebar p{
+    text-align:center;
+    color:#bfc7d5;
+    margin-bottom:30px;
+    font-size:14px;
+}
+
+.sidebar a{
+
+    display:block;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px;
+
+    margin-bottom:12px;
+
+    border-radius:8px;
+
+    transition:0.3s;
+
+}
+
+.sidebar a:hover{
+
+    background:#374151;
+
+}
+
+/* ===== CONTENIDO ===== */
+
+.contenido{
+
+    margin-left:270px;
+
+    padding:35px;
+
+}
+
+.contenido h1{
+
+    margin-bottom:25px;
+
+    color:#1f2937;
+
+}
+
+/* ===== TARJETAS ===== */
+
+.cards{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:35px;
+
+}
+
+.card{
+
+    background:white;
+
+    width:220px;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.1);
+
+}
+
+.card h2{
+
+    font-size:17px;
+
+    color:#555;
+
+}
+
+.card h1{
+
+    margin-top:15px;
+
+    font-size:38px;
+
+    color:#2563eb;
+
+}
+
+/* ===== TABLAS ===== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.1);
+
+}
+
+th{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:14px;
+
+}
+
+td{
+
+    padding:14px;
+
+    text-align:center;
+
+    border-bottom:1px solid #eee;
+
+}
+
+tr:hover{
+
+    background:#f3f4f6;
+
+}
+
+/* ===== BOTONES ===== */
+
+button{
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    color:white;
+
+}
+
+.agregar{
+
+    background:#16a34a;
+
+}
+
+.agregar:hover{
+
+    background:#15803d;
+
+}
+
+.editar{
+
+    background:#f59e0b;
+
+}
+
+.editar:hover{
+
+    background:#d97706;
+
+}
+
+.eliminar{
+
+    background:#dc2626;
+
+}
+
+.eliminar:hover{
+
+    background:#b91c1c;
+
+}
+
+.buscar{
+
+    background:#2563eb;
+
+}
+
+.buscar:hover{
+
+    background:#1d4ed8;
+
+}
+
+/* ===== INPUTS ===== */
+
+input,
+
+select,
+
+textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+    margin-top:6px;
+
+    margin-bottom:18px;
+
+    font-size:15px;
+
+}
+
+form{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.1);
+
+    max-width:700px;
+
+}
+
+/* ===== LOGIN ===== */
+
+.login{
+
+    width:420px;
+
+    margin:80px auto;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+.login h1{
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+}
+
+.login p{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:25px;
+
+}
+
+.login button{
+
+    width:100%;
+
+    background:#2563eb;
+
+}
+
+.login button:hover{
+
+    background:#1d4ed8;
+
+}

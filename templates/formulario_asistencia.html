@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>{{ titulo }}</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="contenido">
+
+<h1>{{ titulo }}</h1>
+
+<form method="POST">
+
+<label>Alumno</label>
+
+<select name="nombre" required>
+
+{% for alumno in alumnos %}
+
+<option
+value="{{ alumno.nombre }}"
+{% if registro and registro.nombre == alumno.nombre %}
+selected
+{% endif %}>
+
+{{ alumno.nombre }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+<br><br>
+
+<label>Fecha</label>
+
+<input
+type="date"
+name="fecha"
+value="{{ registro.fecha if registro else '' }}">
+
+<br><br>
+
+<label>Hora</label>
+
+<input
+type="time"
+name="hora"
+value="{{ registro.hora if registro else '' }}">
+
+<br><br>
+
+<label>Estado</label>
+
+<select name="estado">
+
+<option value="Presente">Presente</option>
+
+<option value="Ausente">Ausente</option>
+
+</select>
+
+<br><br>
+
+<button class="agregar">
+
+💾 Guardar
+
+</button>
+
+</form>
+
+</div>
+
+</body>
+
+</html>

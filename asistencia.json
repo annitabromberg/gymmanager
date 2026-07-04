@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "nombre": "pepito",
+        "fecha": "2026-07-04",
+        "hora": "10:10",
+        "estado": "Presente"
+    },
+    {
+        "id": 2,
+        "nombre": "Sofi",
+        "fecha": "2026-07-04",
+        "hora": "12:12",
+        "estado": "Presente"
+    }
+]

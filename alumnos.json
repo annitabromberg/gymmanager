@@ -1,0 +1,41 @@
+[
+    {
+        "id": 3,
+        "nombre": "Josefina",
+        "edad": "19",
+        "dni": "48411623",
+        "telefono": "542995167071",
+        "email": "majo.velazquezpaz@gmail.com",
+        "altura": "154",
+        "peso": "53",
+        "objetivo": "muscles",
+        "plan": "Básico",
+        "estado": "Activo"
+    },
+    {
+        "id": 4,
+        "nombre": "pepito",
+        "edad": "22",
+        "dni": "48411623",
+        "telefono": "542995167071",
+        "email": "majo.velazquezpaz@gmail.com",
+        "altura": "180",
+        "peso": "60",
+        "objetivo": "culote",
+        "plan": "VIP",
+        "estado": "Activo"
+    },
+    {
+        "id": 5,
+        "nombre": "Sofi",
+        "edad": "23",
+        "dni": "48411623",
+        "telefono": "542995167071",
+        "email": "mariajosefinavelazquezpaz0@gmail.com",
+        "altura": "160",
+        "peso": "55",
+        "objetivo": "culote",
+        "plan": "VIP",
+        "estado": "Activo"
+    }
+]
