@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Perfil del Alumno</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>GymManager</h2>
+
+    <p>Sistema de Gestión</p>
+
+    <a href="/inicio">Inicio</a>
+
+    <a href="/alumnos">Alumnos</a>
+
+    <a href="/rutinas">Rutinas</a>
+
+    <a href="/asistencia">Asistencia</a>
+
+    <a href="/logout">Cerrar sesión</a>
+
+</div>
+
+<div class="contenido">
+
+<h1>Perfil del Alumno</h1>
+
+<table>
+
+<tr>
+
+<th colspan="2">
+
+{{ alumno.nombre }}
+
+</th>
+
+</tr>
+
+<tr>
+
+<td>Edad</td>
+
+<td>{{ alumno.edad }}</td>
+
+</tr>
+
+<tr>
+
+<td>DNI</td>
+
+<td>{{ alumno.dni }}</td>
+
+</tr>
+
+<tr>
+
+<td>Teléfono</td>
+
+<td>{{ alumno.telefono }}</td>
+
+</tr>
+
+<tr>
+
+<td>Email</td>
+
+<td>{{ alumno.email }}</td>
+
+</tr>
+
+<tr>
+
+<td>Altura</td>
+
+<td>{{ alumno.altura }} m</td>
+
+</tr>
+
+<tr>
+
+<td>Peso</td>
+
+<td>{{ alumno.peso }} kg</td>
+<tr>
+
+    <td>IMC</td>
+
+    <td>
+
+        {% if imc %}
+
+            {{ imc }}
+
+        {% else %}
+
+            -
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+<tr>
+
+    <td>Estado físico</td>
+
+    <td>
+
+        {{ estado_imc }}
+
+    </td>
+
+</tr>
+
+</tr>
+
+<tr>
+
+<td>Objetivo</td>
+
+<td>{{ alumno.objetivo }}</td>
+
+</tr>
+
+<tr>
+
+<td>Plan</td>
+
+<td>{{ alumno.plan }}</td>
+
+</tr>
+
+<tr>
+
+<td>Estado</td>
+
+<td>{{ alumno.estado }}</td>
+
+</tr>
+
+</table>
+
+<br>
+
+<h2>Rutina semanal</h2>
+
+{% if rutina %}
+
+<table>
+
+<tr>
+
+<th>Lunes</th>
+
+<th>Martes</th>
+
+<th>Miércoles</th>
+
+<th>Jueves</th>
+
+<th>Viernes</th>
+
+</tr>
+
+<tr>
+
+<td>{{ rutina.lunes }}</td>
+
+<td>{{ rutina.martes }}</td>
+
+<td>{{ rutina.miercoles }}</td>
+
+<td>{{ rutina.jueves }}</td>
+
+<td>{{ rutina.viernes }}</td>
+
+</tr>
+
+</table>
+
+{% else %}
+
+<p>Este alumno todavía no tiene una rutina asignada.</p>
+
+{% endif %}
+
+<br>
+
+<h2>Asistencias</h2>
+
+<table>
+
+<tr>
+
+<th>Fecha</th>
+
+<th>Hora</th>
+
+</tr>
+
+{% for asistencia in asistencias %}
+
+<tr>
+
+<td>{{ asistencia.fecha }}</td>
+
+<td>{{ asistencia.hora }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+
+</html>

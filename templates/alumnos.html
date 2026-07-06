@@ -99,19 +99,28 @@
 
                     <td>
 
-                        <a href="/editar/{{ alumno.id }}">
+                        <a href="/perfil_alumno/{{ alumno.id }}">
 
-                            <button class="editar">
-                                ✏️ Editar
-                            </button>
+                             <button class="buscar">Ver</button>
 
                         </a>
 
-                        <a href="/eliminar/{{ alumno.id }}"
-                           onclick="return confirm('¿Desea eliminar este alumno?');">
+                         <a href="/editar/{{ alumno.id }}">
+
+                             <button class="editar">
+
+                             Editar
+
+                             </button>
+
+                        </a>
+
+                        <a href="/eliminar/{{ alumno.id }}">
 
                             <button class="eliminar">
-                                🗑️ Eliminar
+
+                            Eliminar
+
                             </button>
 
                         </a>

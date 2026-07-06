@@ -72,6 +72,62 @@
         </div>
 
     </div>
+<hr>
+
+<h2>Últimos alumnos registrados</h2>
+
+<table>
+
+<tr>
+    <th>Nombre</th>
+    <th>Plan</th>
+</tr>
+
+{% for alumno in ultimos_alumnos %}
+
+<tr>
+
+    <td>{{ alumno.nombre }}</td>
+
+    <td>{{ alumno.plan }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<h2>Últimas asistencias</h2>
+
+<table>
+
+<tr>
+
+    <th>Alumno</th>
+
+    <th>Fecha</th>
+
+    <th>Hora</th>
+
+</tr>
+
+{% for asistencia in ultimas_asistencias %}
+
+<tr>
+
+    <td>{{ asistencia.nombre }}</td>
+
+    <td>{{ asistencia.fecha }}</td>
+
+    <td>{{ asistencia.hora }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
 
     <h2>Bienvenido al sistema</h2>
 

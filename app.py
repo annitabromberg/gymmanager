@@ -9,8 +9,8 @@ app.secret_key = "gymmanager"
 # USUARIO DEL SISTEMA
 # ===============================
 
-USUARIO = "six"
-CONTRASENA = "seven"
+USUARIO = "admin"
+CONTRASENA = "1234"
 
 # ===============================
 # FUNCIONES JSON
@@ -67,22 +67,22 @@ def inicio():
 
     alumnos = cargar_alumnos()
     rutinas = cargar_rutinas()
-    asistencia = cargar_asistencia()
+    asistencias = cargar_asistencia()
 
-    cantidad_cuotas = 0
+    # Últimos 5 alumnos agregados
+    ultimos_alumnos = alumnos[-5:]
+
+    # Últimas 5 asistencias
+    ultimas_asistencias = asistencias[-5:]
 
     return render_template(
-
         "inicio.html",
-
         cantidad=len(alumnos),
-
         cantidad_rutinas=len(rutinas),
-
-        cantidad_asistencia=len(asistencia),
-
-        cantidad_cuotas=cantidad_cuotas
-
+        cantidad_asistencia=len(asistencias),
+        cantidad_cuotas=0,
+        ultimos_alumnos=ultimos_alumnos[::-1],
+        ultimas_asistencias=ultimas_asistencias[::-1]
     )
 # ===============================
 # CERRAR SESIÓN
@@ -591,9 +591,81 @@ def eliminar_asistencia(id):
     guardar_asistencia(asistencia)
 
     return redirect("/asistencia")
+
+@app.route("/perfil_alumno/<int:id>")
+def perfil_alumno(id):
+
+    if "usuario" not in session:
+        return redirect("/")
+
+    alumnos = cargar_alumnos()
+
+    rutinas = cargar_rutinas()
+
+    asistencias = cargar_asistencia()
+
+    alumno = next((a for a in alumnos if a["id"] == id), None)
+        # ======================
+    # CALCULAR IMC
+    # ======================
+
+    imc = None
+    estado_imc = "Sin datos"
+
+    try:
+        peso = float(alumno["peso"])
+        altura = float(alumno["altura"])
+
+        # Si la altura está en centímetros, la pasamos a metros
+        if altura > 3:
+            altura = altura / 100
+
+        if altura > 0:
+            imc = round(peso / (altura ** 2), 2)
+
+            if imc < 18.5:
+                estado_imc = "Bajo peso"
+            elif imc < 25:
+                estado_imc = "Peso normal"
+            elif imc < 30:
+                estado_imc = "Sobrepeso"
+            else:
+                estado_imc = "Obesidad"
+
+    except:
+        pass
+
+    if alumno is None:
+        return redirect("/alumnos")
+
+    rutina = next(
+
+        (r for r in rutinas if r["alumno"] == alumno["nombre"]),
+
+        None
+
+    )
+
+    asistencias_alumno = [
+
+        a for a in asistencias
+
+        if a["nombre"] == alumno["nombre"]
+
+    ]
+
+    return render_template(
+        "perfil_alumno.html",
+      alumno=alumno,
+     rutina=rutina,
+     asistencias=asistencias_alumno,
+     imc=imc,
+     estado_imc=estado_imc
+    )
 # ===============================
 # EJECUTAR
 # ===============================
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
