@@ -64,9 +64,11 @@ value="{{ registro.hora if registro else '' }}">
 
 <select name="estado">
 
-<option value="Presente">Presente</option>
+<option value="Presente"
+{% if registro and registro.estado == 'Presente' %}selected{% endif %}>Presente</option>
 
-<option value="Ausente">Ausente</option>
+<option value="Ausente"
+{% if registro and registro.estado == 'Ausente' %}selected{% endif %}>Ausente</option>
 
 </select>
 

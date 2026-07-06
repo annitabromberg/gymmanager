@@ -228,11 +228,16 @@ def editar(id):
 
     if request.method == "POST":
 
-        alumno["nombre"] = request.form["nombre"]
-        alumno["edad"] = request.form["edad"]
-        alumno["peso"] = request.form["peso"]
-        alumno["objetivo"] = request.form["objetivo"]
-        alumno["plan"] = request.form["plan"]
+        alumno["nombre"] = request.form.get("nombre", "")
+        alumno["edad"] = request.form.get("edad", "")
+        alumno["dni"] = request.form.get("dni", "")
+        alumno["telefono"] = request.form.get("telefono", "")
+        alumno["email"] = request.form.get("email", "")
+        alumno["altura"] = request.form.get("altura", "")
+        alumno["peso"] = request.form.get("peso", "")
+        alumno["objetivo"] = request.form.get("objetivo", "")
+        alumno["plan"] = request.form.get("plan", "")
+        alumno["estado"] = request.form.get("estado", "")
 
         guardar_alumnos(alumnos)
 
@@ -381,17 +386,12 @@ def editar_rutina(id):
 
     if request.method == "POST":
 
-        rutina["alumno"]=request.form["alumno"]
-
-        rutina["lunes"]=request.form["lunes"]
-
-        rutina["martes"]=request.form["martes"]
-
-        rutina["miercoles"]=request.form["miercoles"]
-
-        rutina["jueves"]=request.form["jueves"]
-
-        rutina["viernes"]=request.form["viernes"]
+        rutina["alumno"] = request.form.get("alumno", "")
+        rutina["lunes"] = request.form.get("lunes", "")
+        rutina["martes"] = request.form.get("martes", "")
+        rutina["miercoles"] = request.form.get("miercoles", "")
+        rutina["jueves"] = request.form.get("jueves", "")
+        rutina["viernes"] = request.form.get("viernes", "")
         guardar_rutinas(rutinas)
 
         return redirect("/rutinas")
@@ -544,15 +544,15 @@ def editar_asistencia(id):
 
             break
 
+    if registro is None:
+        return redirect("/asistencia")
+
     if request.method == "POST":
 
-        registro["nombre"] = request.form["nombre"]
-
-        registro["fecha"] = request.form["fecha"]
-
-        registro["hora"] = request.form["hora"]
-
-        registro["estado"] = request.form["estado"]
+        registro["nombre"] = request.form.get("nombre", "")
+        registro["fecha"] = request.form.get("fecha", "")
+        registro["hora"] = request.form.get("hora", "")
+        registro["estado"] = request.form.get("estado", "")
 
         guardar_asistencia(asistencia)
 
