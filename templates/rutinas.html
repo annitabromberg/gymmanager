@@ -1,117 +1,51 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-
-<meta charset="UTF-8">
-
-<title>Rutinas</title>
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}">
-
-</head>
-
-<body>
-
-<div class="sidebar">
-
-<h2>🏋️ GymManager SixSeven 6767</h2>
-
-<a href="/inicio">🏠 Inicio</a>
-<a href="/alumnos">👥 Alumnos</a>
-<a href="/rutinas">💪 Rutinas</a>
-<a href="/asistencia">📅 Asistencia</a>
-<a href="/logout">🚪 Cerrar sesión</a>
-
-</div>
-
+{% extends "base.html" %}
+{% block title %}Rutinas{% endblock %}
+{% block content %}
 <div class="contenido">
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">Planificación</span>
+            <h1>Rutinas por día</h1>
+            <p>Organiza los entrenamientos y visualiza la programación semanal de cada alumno.</p>
+        </div>
+        <a class="btn btn-primary" href="/agregar_rutina">Nueva rutina</a>
+    </div>
 
-<h1>Rutinas</h1>
+    <form method="GET">
+        <input type="text" name="buscar" placeholder="Buscar rutina" value="{{ buscar }}">
+        <button class="buscar" type="submit">Buscar</button>
+    </form>
 
-<a href="/agregar_rutina">
-
-<button class="agregar">
-
-➕ Nueva Rutina
-
-</button>
-
-</a>
-
-<br><br>
-
-<form method="GET">
-
-<input
-type="text"
-name="buscar"
-placeholder="Buscar rutina"
-value="{{ buscar }}">
-
-<button>🔍 Buscar</button>
-
-</form>
-
-<br>
-
-<table class="tabla">
-
-<tr>
-
-<th>Alumno</th>
-
-<th>Lunes</th>
-
-<th>Martes</th>
-
-<th>Miércoles</th>
-
-<th>Jueves</th>
-
-<th>Viernes</th>
-
-<th>Acciones</th>
-
-</tr>
-
-{% for rutina in rutinas %}
-
-<tr>
-
-<td>{{ rutina.alumno }}</td>
-
-<td>{{ rutina.lunes }}</td>
-
-<td>{{ rutina.martes }}</td>
-
-<td>{{ rutina.miercoles }}</td>
-
-<td>{{ rutina.jueves }}</td>
-
-<td>{{ rutina.viernes }}</td>
-
-<td>
-
-<a href="/editar_rutina/{{ rutina.id }}">
-<button class="editar">✏️</button>
-</a>
-
-<a href="/eliminar_rutina/{{ rutina.id }}">
-<button class="eliminar">🗑️</button>
-</a>
-
-</td>
-
-</tr>
-
-{% endfor %}
-
-</table>
-
+    <div class="panel">
+        <div class="table-wrapper">
+            <table class="tabla">
+                <tr>
+                    <th>Alumno</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                    <th>Acciones</th>
+                </tr>
+                {% for rutina in rutinas %}
+                <tr>
+                    <td>{{ rutina.alumno }}</td>
+                    <td>{{ rutina.lunes }}</td>
+                    <td>{{ rutina.martes }}</td>
+                    <td>{{ rutina.miercoles }}</td>
+                    <td>{{ rutina.jueves }}</td>
+                    <td>{{ rutina.viernes }}</td>
+                    <td>
+                        <div class="action-group">
+                            <a href="/editar_rutina/{{ rutina.id }}"><button class="editar">Editar</button></a>
+                            <a href="/eliminar_rutina/{{ rutina.id }}"><button class="eliminar">Eliminar</button></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
-
-</body>
-
-</html>
+{% endblock %}
