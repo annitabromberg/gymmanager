@@ -1,14 +1,13 @@
 import json
-import os
-import tempfile
-import importlib.util
+import importlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-spec = importlib.util.spec_from_file_location("gymmanager_app", ROOT / "app.py")
-app_module = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(app_module)
+import sys
+sys.path.insert(0, str(ROOT))
+
+app_module = importlib.import_module("gymmanager_app")
 
 
 def test_editar_alumno_guarda_todos_los_campos(tmp_path, monkeypatch):
