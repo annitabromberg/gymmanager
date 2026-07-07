@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="auth-page">
-    <video class="auth-video" autoplay muted loop playsinline>
-        <source src="{{ url_for('static', filename='videos/static/videos/gym-video.mp4') }}" type="video/mp4">
-    </video>
-    <div class="auth-overlay"></div>
+    <div class="login-video-wrapper">
+        <video autoplay muted loop playsinline preload="auto">
+            <source src="{{ url_for('static', filename='login-bg.mp4') }}" type="video/mp4">
+        </video>
+        <div class="login-video-overlay"></div>
+    </div>
 
     <div class="login-card">
         <div class="brand">
             <div class="brand-icon">GF</div>
             <div>
                 <h1>GymManager</h1>
-                <p>Sistema de gestión para gimnasios</p>
+                <p>Tu gimnasio en una sola plataforma</p>
             </div>
         </div>
 
@@ -25,12 +27,16 @@
             <p class="error">{{ error }}</p>
         {% endif %}
 
-        <form method="POST">
-            <label>Usuario</label>
-            <input type="text" name="usuario" placeholder="Ingrese su usuario" required>
+        <form method="POST" class="login-form">
+            <div class="field-group">
+                <label for="usuario">Usuario</label>
+                <input id="usuario" type="text" name="usuario" placeholder="Ingrese su usuario" required>
+            </div>
 
-            <label>Contraseña</label>
-            <input type="password" name="password" placeholder="Ingrese su contraseña" required>
+            <div class="field-group">
+                <label for="password">Contraseña</label>
+                <input id="password" type="password" name="password" placeholder="Ingrese su contraseña" required>
+            </div>
 
             <button type="submit">Iniciar sesión</button>
         </form>
