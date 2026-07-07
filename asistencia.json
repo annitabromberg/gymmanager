@@ -12,5 +12,12 @@
         "fecha": "2026-07-04",
         "hora": "12:12",
         "estado": "Presente"
+    },
+    {
+        "id": 3,
+        "nombre": "Josefina",
+        "fecha": "2026-07-06",
+        "hora": "12:12",
+        "estado": "Presente"
     }
 ]
