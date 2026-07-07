@@ -20,7 +20,11 @@
         'eliminar_rutina': 'rutinas',
         'agregar_asistencia': 'asistencia',
         'editar_asistencia': 'asistencia',
-        'eliminar_asistencia': 'asistencia'
+        'eliminar_asistencia': 'asistencia',
+        'cuotas': 'cuotas',
+        'agregar_cuota': 'cuotas',
+        'editar_cuota': 'cuotas',
+        'eliminar_cuota': 'cuotas'
     } %}
     {% set current_page = nav_map.get(request.endpoint, 'inicio') %}
 
@@ -51,6 +55,8 @@
             <a href="/alumnos" class="{% if current_page == 'alumnos' %}active{% endif %}">Alumnos</a>
             <a href="/rutinas" class="{% if current_page == 'rutinas' %}active{% endif %}">Rutinas</a>
             <a href="/asistencia" class="{% if current_page == 'asistencia' %}active{% endif %}">Asistencia</a>
+            <a href="/cuotas" class="{% if current_page == 'cuotas' %}active{% endif %}">Cuotas</a>
+            <a href="/cuotas" class="{% if current_page == 'cuotas' %}active{% endif %}">Gestión de cuotas</a>
             <a href="/logout">Cerrar sesión</a>
         </nav>
 

@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Gestión de Cuotas</h1>
+
+<div class="barra-superior">
+
+    <form method="GET" action="/cuotas">
+
+        <input
+            type="text"
+            name="buscar"
+            placeholder="Buscar alumno..."
+            value="{{ buscar }}">
+
+        <button type="submit" class="buscar">
+
+            Buscar
+
+        </button>
+
+    </form>
+
+    <a href="/agregar_cuota">
+
+        <button class="agregar">
+
+            Nueva Cuota
+
+        </button>
+
+    </a>
+
+</div>
+
+<table>
+
+    <tr>
+
+        <th>ID</th>
+
+        <th>Alumno</th>
+
+        <th>Plan</th>
+
+        <th>Monto</th>
+
+        <th>Vencimiento</th>
+
+        <th>Estado</th>
+
+        <th>Acciones</th>
+
+    </tr>
+
+    {% for cuota in cuotas %}
+
+    <tr>
+
+        <td>{{ cuota.id }}</td>
+
+        <td>{{ cuota.alumno }}</td>
+
+        <td>{{ cuota.plan }}</td>
+
+        <td>${{ cuota.monto }}</td>
+
+        <td>{{ cuota.vencimiento }}</td>
+
+        <td>{{ cuota.estado }}</td>
+
+        <td>
+
+            <a href="/editar_cuota/{{ cuota.id }}">
+
+                <button class="editar">
+
+                    Editar
+
+                </button>
+
+            </a>
+
+            <a href="/eliminar_cuota/{{ cuota.id }}">
+
+                <button class="eliminar">
+
+                    Eliminar
+
+                </button>
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,12 +1,12 @@
 [
     {
         "id": 1,
-        "alumno": "pepito",
-        "lunes": "Gluteo",
-        "martes": "Espalda",
-        "miercoles": "Pierna completa",
-        "jueves": "Pecho y ticeps",
-        "viernes": "Gluteo y cardio"
+        "alumno": "Ana",
+        "lunes": "L1",
+        "martes": "L2",
+        "miercoles": "L3",
+        "jueves": "L4",
+        "viernes": "L5"
     },
     {
         "id": 2,

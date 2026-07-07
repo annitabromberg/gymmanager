@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "alumno": "Ana",
+        "plan": "Premium",
+        "monto": "25000",
+        "vencimiento": "2026-08-10",
+        "estado": "Pendiente"
+    },
+    {
+        "id": 2,
+        "alumno": "Ana",
+        "plan": "Premium",
+        "monto": "25000",
+        "vencimiento": "2026-08-10",
+        "estado": "Pendiente"
+    }
+]

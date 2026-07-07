@@ -32,6 +32,87 @@ def guardar_alumnos(alumnos):
         json.dump(alumnos, archivo, indent=4, ensure_ascii=False)
 
 # ===============================
+# CUOTAS
+# ===============================
+
+def cargar_cuotas():
+    try:
+        with open("cuotas.json", "r", encoding="utf-8") as archivo:
+            return json.load(archivo)
+    except:
+        return []
+
+
+def guardar_cuotas(cuotas):
+    with open("cuotas.json", "w", encoding="utf-8") as archivo:
+        json.dump(cuotas, archivo, indent=4, ensure_ascii=False)
+
+# ===============================
+# LISTA DE CUOTAS
+# ===============================
+
+@app.route("/cuotas")
+def cuotas():
+
+    if "usuario" not in session:
+        return redirect("/")
+
+    lista = cargar_cuotas()
+
+    buscar = request.args.get("buscar", "")
+
+    if buscar:
+        lista = [
+            cuota for cuota in lista
+            if buscar.lower() in cuota["alumno"].lower()
+        ]
+
+    return render_template(
+        "cuotas.html",
+        cuotas=lista,
+        buscar=buscar
+    )
+    
+# ===============================
+# AGREGAR CUOTA
+# ===============================
+
+@app.route("/agregar_cuota", methods=["GET", "POST"])
+def agregar_cuota():
+
+    if "usuario" not in session:
+        return redirect("/")
+
+    cuotas = cargar_cuotas()
+    alumnos = cargar_alumnos()
+
+    if request.method == "POST":
+
+        if cuotas:
+            nuevo_id = max(c["id"] for c in cuotas) + 1
+        else:
+            nuevo_id = 1
+
+        nueva = {
+            "id": nuevo_id,
+            "alumno": request.form["alumno"],
+            "plan": request.form["plan"],
+            "monto": request.form["monto"],
+            "vencimiento": request.form["vencimiento"],
+            "estado": request.form["estado"]
+        }
+
+        cuotas.append(nueva)
+        guardar_cuotas(cuotas)
+
+        return redirect("/cuotas")
+
+    return render_template(
+        "formulario_cuota.html",
+        alumnos=alumnos
+    )
+
+# ===============================
 # LOGIN
 # ===============================
 

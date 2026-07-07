@@ -4,9 +4,11 @@ from .config import CONTRASENA, USUARIO
 from .data import (
     cargar_alumnos,
     cargar_asistencia,
+    cargar_cuotas,
     cargar_rutinas,
     guardar_alumnos,
     guardar_asistencia,
+    guardar_cuotas,
     guardar_rutinas,
 )
 
@@ -43,13 +45,14 @@ def inicio():
     alumnos = cargar_alumnos()
     rutinas = cargar_rutinas()
     asistencias = cargar_asistencia()
+    cuotas = cargar_cuotas()
 
     return render_template(
         "inicio.html",
         cantidad=len(alumnos),
         cantidad_rutinas=len(rutinas),
         cantidad_asistencia=len(asistencias),
-        cantidad_cuotas=0,
+        cantidad_cuotas=sum(1 for cuota in cuotas if cuota.get("estado") == "Pendiente"),
         ultimos_alumnos=alumnos[-5:][::-1],
         ultimas_asistencias=asistencias[-5:][::-1],
     )
@@ -150,6 +153,88 @@ def eliminar(id):
     alumnos = [a for a in alumnos if a["id"] != id]
     guardar_alumnos(alumnos)
     return redirect("/alumnos")
+
+
+@main.route("/cuotas")
+def cuotas():
+    redirect_result = requiere_login()
+    if redirect_result is not None:
+        return redirect_result
+
+    lista = cargar_cuotas()
+    buscar = request.args.get("buscar", "")
+
+    if buscar:
+        lista = [cuota for cuota in lista if buscar.lower() in cuota["alumno"].lower()]
+
+    return render_template("cuotas.html", cuotas=lista, buscar=buscar)
+
+
+@main.route("/agregar_cuota", methods=["GET", "POST"])
+def agregar_cuota():
+    redirect_result = requiere_login()
+    if redirect_result is not None:
+        return redirect_result
+
+    cuotas = cargar_cuotas()
+    alumnos = cargar_alumnos()
+
+    if request.method == "POST":
+        if cuotas:
+            nuevo_id = max(c["id"] for c in cuotas) + 1
+        else:
+            nuevo_id = 1
+
+        nueva = {
+            "id": nuevo_id,
+            "alumno": request.form["alumno"],
+            "plan": request.form["plan"],
+            "monto": request.form["monto"],
+            "vencimiento": request.form["vencimiento"],
+            "estado": request.form["estado"],
+        }
+
+        cuotas.append(nueva)
+        guardar_cuotas(cuotas)
+        return redirect("/cuotas")
+
+    return render_template("formulario_cuota.html", alumnos=alumnos)
+
+
+@main.route("/editar_cuota/<int:id>", methods=["GET", "POST"])
+def editar_cuota(id):
+    redirect_result = requiere_login()
+    if redirect_result is not None:
+        return redirect_result
+
+    cuotas = cargar_cuotas()
+    cuota = next((c for c in cuotas if c["id"] == id), None)
+
+    if cuota is None:
+        return redirect("/cuotas")
+
+    if request.method == "POST":
+        cuota["alumno"] = request.form.get("alumno", "")
+        cuota["plan"] = request.form.get("plan", "")
+        cuota["monto"] = request.form.get("monto", "")
+        cuota["vencimiento"] = request.form.get("vencimiento", "")
+        cuota["estado"] = request.form.get("estado", "")
+        guardar_cuotas(cuotas)
+        return redirect("/cuotas")
+
+    return render_template("formulario_cuota.html", alumnos=cargar_alumnos(), cuota=cuota)
+
+
+@main.route("/eliminar_cuota/<int:id>")
+def eliminar_cuota(id):
+    redirect_result = requiere_login()
+    if redirect_result is not None:
+        return redirect_result
+
+    cuotas = cargar_cuotas()
+    cuotas = [c for c in cuotas if c["id"] != id]
+    guardar_cuotas(cuotas)
+    return redirect("/cuotas")
 
 
 @main.route("/rutinas")

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Registrar Cuota</h1>
+
+<form method="POST">
+
+    <label>Alumno</label>
+
+    <select name="alumno" required>
+
+        <option value="">Seleccione un alumno</option>
+
+        {% for alumno in alumnos %}
+
+        <option value="{{ alumno.nombre }}" {% if cuota and cuota.alumno == alumno.nombre %}selected{% endif %}>
+
+            {{ alumno.nombre }}
+
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Plan</label>
+
+    <select name="plan" required>
+
+        <option {% if cuota and cuota.plan == 'Básico' %}selected{% endif %}>Básico</option>
+        <option {% if cuota and cuota.plan == 'Premium' %}selected{% endif %}>Premium</option>
+        <option {% if cuota and cuota.plan == 'VIP' %}selected{% endif %}>VIP</option>
+
+    </select>
+
+    <br><br>
+
+    <label>Monto</label>
+
+    <input
+        type="number"
+        name="monto"
+        placeholder="25000"
+        value="{{ cuota.monto if cuota else '' }}"
+        required>
+
+    <br><br>
+
+    <label>Fecha de vencimiento</label>
+
+    <input
+        type="date"
+        name="vencimiento"
+        value="{{ cuota.vencimiento if cuota else '' }}"
+        required>
+
+    <br><br>
+
+    <label>Estado</label>
+
+    <select name="estado">
+
+        <option {% if cuota and cuota.estado == 'Pendiente' %}selected{% endif %}>Pendiente</option>
+
+        <option {% if cuota and cuota.estado == 'Pagada' %}selected{% endif %}>Pagada</option>
+
+    </select>
+
+    <br><br>
+
+    <button class="agregar">
+
+        Guardar Cuota
+
+    </button>
+
+</form>
+
+{% endblock %}

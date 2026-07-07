@@ -3,11 +3,27 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = BASE_DIR / "static"
 TEMPLATES_DIR = BASE_DIR / "templates"
-DATA_DIR = BASE_DIR
 
-ALUMNOS_FILE = DATA_DIR / "alumnos.json"
-RUTINAS_FILE = DATA_DIR / "rutinas.json"
-ASISTENCIA_FILE = DATA_DIR / "asistencia.json"
+
+def data_dir():
+    return Path.cwd()
+
+
+def alumnos_file():
+    return data_dir() / "alumnos.json"
+
+
+def rutinas_file():
+    return data_dir() / "rutinas.json"
+
+
+def asistencia_file():
+    return data_dir() / "asistencia.json"
+
+
+def cuotas_file():
+    return data_dir() / "cuotas.json"
+
 
 USUARIO = "admin"
 CONTRASENA = "1234"
