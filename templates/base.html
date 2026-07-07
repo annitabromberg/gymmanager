@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GymManager{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% set nav_map = {
+        'inicio': 'inicio',
+        'alumnos': 'alumnos',
+        'rutinas': 'rutinas',
+        'asistencia': 'asistencia',
+        'agregar': 'alumnos',
+        'editar': 'alumnos',
+        'eliminar': 'alumnos',
+        'agregar_rutina': 'rutinas',
+        'editar_rutina': 'rutinas',
+        'eliminar_rutina': 'rutinas',
+        'agregar_asistencia': 'asistencia',
+        'editar_asistencia': 'asistencia',
+        'eliminar_asistencia': 'asistencia'
+    } %}
+    {% set current_page = nav_map.get(request.endpoint, 'inicio') %}
+
+    {% if request.endpoint != 'login' %}
+    <div class="overlay" id="sidebarOverlay"></div>
+
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <button class="sidebar-collapse" id="sidebarCollapse" type="button" aria-label="Ocultar menú" title="Ocultar menú">
+        <span>⟨</span>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="brand-block">
+            <div class="brand-icon">GF</div>
+            <div>
+                <h2>GymManager</h2>
+                <p>Gestión inteligente</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="/inicio" class="{% if current_page == 'inicio' %}active{% endif %}">Inicio</a>
+            <a href="/alumnos" class="{% if current_page == 'alumnos' %}active{% endif %}">Alumnos</a>
+            <a href="/rutinas" class="{% if current_page == 'rutinas' %}active{% endif %}">Rutinas</a>
+            <a href="/asistencia" class="{% if current_page == 'asistencia' %}active{% endif %}">Asistencia</a>
+            <a href="/logout">Cerrar sesión</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>Gestión rápida y ordenada</p>
+        </div>
+    </aside>
+    {% endif %}
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% if request.endpoint != 'login' %}
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebarCollapse = document.getElementById('sidebarCollapse');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        if (menuToggle && sidebar) {
+            const openSidebar = () => {
+                document.body.classList.add('sidebar-open');
+                sidebar.classList.add('open');
+                menuToggle.setAttribute('aria-expanded', 'true');
+            };
+
+            const closeSidebar = () => {
+                document.body.classList.remove('sidebar-open');
+                sidebar.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            };
+
+            const toggleDesktopSidebar = () => {
+                document.body.classList.toggle('sidebar-collapsed');
+                sidebar.classList.toggle('collapsed');
+                const collapsed = document.body.classList.contains('sidebar-collapsed');
+                if (sidebarCollapse) {
+                    sidebarCollapse.setAttribute('aria-label', collapsed ? 'Mostrar menú' : 'Ocultar menú');
+                    sidebarCollapse.title = collapsed ? 'Mostrar menú' : 'Ocultar menú';
+                    sidebarCollapse.innerHTML = collapsed ? '⟩' : '⟨';
+                }
+            };
+
+            menuToggle.addEventListener('click', () => {
+                if (window.innerWidth <= 900) {
+                    const isOpen = document.body.classList.contains('sidebar-open');
+                    isOpen ? closeSidebar() : openSidebar();
+                } else {
+                    toggleDesktopSidebar();
+                }
+            });
+
+            if (sidebarCollapse) {
+                sidebarCollapse.addEventListener('click', toggleDesktopSidebar);
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', closeSidebar);
+            }
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 900) {
+                    closeSidebar();
+                } else {
+                    document.body.classList.remove('sidebar-collapsed');
+                    sidebar.classList.remove('collapsed');
+                    if (sidebarCollapse) {
+                        sidebarCollapse.setAttribute('aria-label', 'Ocultar menú');
+                        sidebarCollapse.title = 'Ocultar menú';
+                        sidebarCollapse.innerHTML = '⟨';
+                    }
+                }
+            });
+        }
+    </script>
+    {% endif %}
+</body>
+</html>

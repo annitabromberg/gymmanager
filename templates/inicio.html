@@ -1,145 +1,71 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-
-    <meta charset="UTF-8">
-    <title>GymManager - Inicio</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-</head>
-
-<body>
-
-<div class="sidebar">
-
-    <h2>GymManager</h2>
-
-    <p>Sistema de Gestión</p>
-
-    <a href="/inicio">Inicio</a>
-
-    <a href="/alumnos">Alumnos</a>
-
-    <a href="/rutinas">Rutinas</a>
-
-    <a href="/asistencia">Asistencia</a>
-
-    <a href="/cuotas">Cuotas</a>
-
-    <a href="/logout">Cerrar sesión</a>
-
-</div>
-
-
+{% extends "base.html" %}
+{% block title %}GymManager - Inicio{% endblock %}
+{% block content %}
 <div class="contenido">
-
-    <h1>Panel Principal</h1>
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">Panel principal</span>
+            <h1>Gestiona tu gimnasio con claridad</h1>
+            <p>Visualiza el estado general del negocio y mantén a tus alumnos, rutinas y asistencias organizadas en un solo lugar.</p>
+        </div>
+        <a class="btn btn-primary" href="/alumnos">Ver alumnos</a>
+    </div>
 
     <div class="cards">
-
         <div class="card">
-
             <h2>Alumnos</h2>
-
             <h1>{{ cantidad }}</h1>
-
         </div>
-
         <div class="card">
-
             <h2>Rutinas</h2>
-
             <h1>{{ cantidad_rutinas }}</h1>
-
         </div>
-
         <div class="card">
-
             <h2>Asistencias</h2>
-
             <h1>{{ cantidad_asistencia }}</h1>
-
         </div>
-
         <div class="card">
-
-            <h2>Cuotas Pendientes</h2>
-
+            <h2>Cuotas pendientes</h2>
             <h1>{{ cantidad_cuotas }}</h1>
-
         </div>
-
     </div>
-<hr>
 
-<h2>Últimos alumnos registrados</h2>
+    <div class="panel">
+        <h2>Últimos alumnos registrados</h2>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Plan</th>
+                </tr>
+                {% for alumno in ultimos_alumnos %}
+                <tr>
+                    <td>{{ alumno.nombre }}</td>
+                    <td>{{ alumno.plan }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 
-<table>
-
-<tr>
-    <th>Nombre</th>
-    <th>Plan</th>
-</tr>
-
-{% for alumno in ultimos_alumnos %}
-
-<tr>
-
-    <td>{{ alumno.nombre }}</td>
-
-    <td>{{ alumno.plan }}</td>
-
-</tr>
-
-{% endfor %}
-
-</table>
-
-<br>
-
-<h2>Últimas asistencias</h2>
-
-<table>
-
-<tr>
-
-    <th>Alumno</th>
-
-    <th>Fecha</th>
-
-    <th>Hora</th>
-
-</tr>
-
-{% for asistencia in ultimas_asistencias %}
-
-<tr>
-
-    <td>{{ asistencia.nombre }}</td>
-
-    <td>{{ asistencia.fecha }}</td>
-
-    <td>{{ asistencia.hora }}</td>
-
-</tr>
-
-{% endfor %}
-
-</table>
-
-    <h2>Bienvenido al sistema</h2>
-
-    <p>
-
-        Desde este panel podrá administrar alumnos, asignar rutinas,
-        registrar asistencias y controlar el estado de las cuotas.
-
-    </p>
-
+    <div class="panel">
+        <h2>Últimas asistencias</h2>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Alumno</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                </tr>
+                {% for asistencia in ultimas_asistencias %}
+                <tr>
+                    <td>{{ asistencia.nombre }}</td>
+                    <td>{{ asistencia.fecha }}</td>
+                    <td>{{ asistencia.hora }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
-
-</body>
-
-</html>
+{% endblock %}

@@ -1,85 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-<meta charset="UTF-8">
-<title>{{ titulo }}</title>
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}">
-
-</head>
-
-<body>
-
+{% extends "base.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
 <div class="contenido">
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">Rutina</span>
+            <h1>{{ titulo }}</h1>
+            <p>Asigna un plan semanal claro y fácil de consultar para cada alumno.</p>
+        </div>
+    </div>
 
-<h1>{{ titulo }}</h1>
+    <form method="POST">
+        <label>Alumno</label>
+        <select name="alumno" required>
+            {% for alumno in alumnos %}
+            <option value="{{ alumno.nombre }}" {% if rutina and rutina.alumno == alumno.nombre %}selected{% endif %}>{{ alumno.nombre }}</option>
+            {% endfor %}
+        </select>
 
-<form method="POST">
+        <label>Lunes</label>
+        <input type="text" name="lunes" value="{{ rutina.lunes if rutina else '' }}">
 
-<label>Alumno</label>
+        <label>Martes</label>
+        <input type="text" name="martes" value="{{ rutina.martes if rutina else '' }}">
 
-<select name="alumno" required>
+        <label>Miércoles</label>
+        <input type="text" name="miercoles" value="{{ rutina.miercoles if rutina else '' }}">
 
-{% for alumno in alumnos %}
+        <label>Jueves</label>
+        <input type="text" name="jueves" value="{{ rutina.jueves if rutina else '' }}">
 
-<option
-value="{{ alumno.nombre }}"
-{% if rutina and rutina.alumno == alumno.nombre %}
-selected
-{% endif %}>
+        <label>Viernes</label>
+        <input type="text" name="viernes" value="{{ rutina.viernes if rutina else '' }}">
 
-{{ alumno.nombre }}
-
-</option>
-
-{% endfor %}
-
-</select>
-
-<br><br>
-
-<label>Lunes</label>
-<input type="text" name="lunes"
-value="{{ rutina.lunes if rutina else '' }}">
-
-<br><br>
-
-<label>Martes</label>
-<input type="text" name="martes"
-value="{{ rutina.martes if rutina else '' }}">
-
-<br><br>
-
-<label>Miércoles</label>
-<input type="text" name="miercoles"
-value="{{ rutina.miercoles if rutina else '' }}">
-
-<br><br>
-
-<label>Jueves</label>
-<input type="text" name="jueves"
-value="{{ rutina.jueves if rutina else '' }}">
-
-<br><br>
-
-<label>Viernes</label>
-<input type="text" name="viernes"
-value="{{ rutina.viernes if rutina else '' }}">
-
-<br><br>
-
-<button class="agregar">
-
-💾 Guardar Rutina
-
-</button>
-
-</form>
-
+        <div class="action-group" style="margin-top: 12px;">
+            <button class="agregar" type="submit">Guardar Rutina</button>
+            <a href="/rutinas"><button type="button">Cancelar</button></a>
+        </div>
+    </form>
 </div>
-
-</body>
-
-</html>
+{% endblock %}

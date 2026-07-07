@@ -1,156 +1,59 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-
-    <meta charset="UTF-8">
-    <title>GymManager - Alumnos</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-</head>
-
-<body>
-
-<div class="sidebar">
-
-    <h2>🏋️ GymManager SixSeven 6767</h2>
-
-    <a href="/inicio">🏠 Inicio</a>
-    <a href="/alumnos">👥 Alumnos</a>
-    <a href="/rutinas">💪 Rutinas</a>
-    <a href="/asistencia">📅 Asistencia</a>
-    <a href="/logout">🚪 Cerrar sesión</a>
-
-</div>
-
+{% extends "base.html" %}
+{% block title %}GymManager - Alumnos{% endblock %}
+{% block content %}
 <div class="contenido">
-
-    <h1>Gestión de Alumnos</h1>
-
-    <br>
-
-    <!-- BOTÓN AGREGAR -->
-
-    <a href="/agregar">
-
-        <button class="agregar">
-            ➕ Agregar Alumno
-        </button>
-
-    </a>
-
-    <br><br>
-
-    <!-- BUSCADOR -->
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">Gestión de alumnos</span>
+            <h1>Controla tu base de clientes</h1>
+            <p>Consulta, agrega y administra los perfiles de tus alumnos desde una vista clara y rápida.</p>
+        </div>
+        <a class="btn btn-primary" href="/agregar">Agregar alumno</a>
+    </div>
 
     <form method="GET" action="/alumnos">
-
-        <input
-            type="text"
-            name="buscar"
-            placeholder="🔍 Buscar alumno..."
-            value="{{ buscar }}">
-
-        <button type="submit">
-            Buscar
-        </button>
-
+        <input type="text" name="buscar" placeholder="Buscar alumno..." value="{{ buscar }}">
+        <button class="buscar" type="submit">Buscar</button>
     </form>
 
-    <br><br>
-
-    <!-- TABLA -->
-
-    <table class="tabla">
-
-        <thead>
-
-            <tr>
-
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Teléfono</th>
-                <th>Plan</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            {% if alumnos %}
-
-                {% for alumno in alumnos %}
-
-                <tr>
-
-                    <td>{{ alumno.id }}</td>
-
-                    <td>{{ alumno.nombre }}</td>
-
-                    <td>{{ alumno.telefono }}</td>
-
-                    <td>{{ alumno.plan }}</td>
-
-                    <td>{{ alumno.estado }}</td>
-
-                    <td>
-
-                        <a href="/perfil_alumno/{{ alumno.id }}">
-
-                             <button class="buscar">Ver</button>
-
-                        </a>
-
-                         <a href="/editar/{{ alumno.id }}">
-
-                             <button class="editar">
-
-                             Editar
-
-                             </button>
-
-                        </a>
-
-                        <a href="/eliminar/{{ alumno.id }}">
-
-                            <button class="eliminar">
-
-                            Eliminar
-
-                            </button>
-
-                        </a>
-
-                    </td>
-
-                </tr>
-
-                {% endfor %}
-
-            {% else %}
-
-                <tr>
-
-                    <td colspan="7">
-
-                        No hay alumnos registrados.
-
-                    </td>
-
-                </tr>
-
-            {% endif %}
-
-        </tbody>
-
-    </table>
-
+    <div class="panel">
+        <div class="table-wrapper">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Plan</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if alumnos %}
+                        {% for alumno in alumnos %}
+                        <tr>
+                            <td>{{ alumno.id }}</td>
+                            <td>{{ alumno.nombre }}</td>
+                            <td>{{ alumno.telefono }}</td>
+                            <td>{{ alumno.plan }}</td>
+                            <td>{{ alumno.estado }}</td>
+                            <td>
+                                <div class="action-group">
+                                    <a href="/editar/{{ alumno.id }}"><button class="editar">Editar</button></a>
+                                    <a href="/eliminar/{{ alumno.id }}"><button class="eliminar">Eliminar</button></a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6">No hay alumnos registrados.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-
-</body>
-
-</html>
+{% endblock %}

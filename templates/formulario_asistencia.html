@@ -1,89 +1,39 @@
-<!DOCTYPE html>
-
-<html lang="es">
-
-<head>
-
-<meta charset="UTF-8">
-
-<title>{{ titulo }}</title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-</head>
-
-<body>
-
+{% extends "base.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
 <div class="contenido">
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">Asistencia</span>
+            <h1>{{ titulo }}</h1>
+            <p>Registra el ingreso de los alumnos de manera rápida y consistente.</p>
+        </div>
+    </div>
 
-<h1>{{ titulo }}</h1>
+    <form method="POST">
+        <label>Alumno</label>
+        <select name="nombre" required>
+            {% for alumno in alumnos %}
+            <option value="{{ alumno.nombre }}" {% if registro and registro.nombre == alumno.nombre %}selected{% endif %}>{{ alumno.nombre }}</option>
+            {% endfor %}
+        </select>
 
-<form method="POST">
+        <label>Fecha</label>
+        <input type="date" name="fecha" value="{{ registro.fecha if registro else '' }}">
 
-<label>Alumno</label>
+        <label>Hora</label>
+        <input type="time" name="hora" value="{{ registro.hora if registro else '' }}">
 
-<select name="nombre" required>
+        <label>Estado</label>
+        <select name="estado">
+            <option value="Presente" {% if registro and registro.estado == 'Presente' %}selected{% endif %}>Presente</option>
+            <option value="Ausente" {% if registro and registro.estado == 'Ausente' %}selected{% endif %}>Ausente</option>
+        </select>
 
-{% for alumno in alumnos %}
-
-<option
-value="{{ alumno.nombre }}"
-{% if registro and registro.nombre == alumno.nombre %}
-selected
-{% endif %}>
-
-{{ alumno.nombre }}
-
-</option>
-
-{% endfor %}
-
-</select>
-
-<br><br>
-
-<label>Fecha</label>
-
-<input
-type="date"
-name="fecha"
-value="{{ registro.fecha if registro else '' }}">
-
-<br><br>
-
-<label>Hora</label>
-
-<input
-type="time"
-name="hora"
-value="{{ registro.hora if registro else '' }}">
-
-<br><br>
-
-<label>Estado</label>
-
-<select name="estado">
-
-<option value="Presente"
-{% if registro and registro.estado == 'Presente' %}selected{% endif %}>Presente</option>
-
-<option value="Ausente"
-{% if registro and registro.estado == 'Ausente' %}selected{% endif %}>Ausente</option>
-
-</select>
-
-<br><br>
-
-<button class="agregar">
-
-💾 Guardar
-
-</button>
-
-</form>
-
+        <div class="action-group" style="margin-top: 12px;">
+            <button class="agregar" type="submit">Guardar</button>
+            <a href="/asistencia"><button type="button">Cancelar</button></a>
+        </div>
+    </form>
 </div>
-
-</body>
-
-</html>
+{% endblock %}
