@@ -112,6 +112,52 @@ def agregar_cuota():
         alumnos=alumnos
     )
 
+
+@app.route("/editar_cuota/<int:id>", methods=["GET", "POST"])
+def editar_cuota(id):
+
+    if "usuario" not in session:
+        return redirect("/")
+
+    cuotas = cargar_cuotas()
+
+    cuota = None
+
+    for c in cuotas:
+        if c["id"] == id:
+            cuota = c
+            break
+
+    if cuota is None:
+        return redirect("/cuotas")
+
+    if request.method == "POST":
+        cuota["alumno"] = request.form.get("alumno", "")
+        cuota["plan"] = request.form.get("plan", "")
+        cuota["monto"] = request.form.get("monto", "")
+        cuota["vencimiento"] = request.form.get("vencimiento", "")
+        cuota["estado"] = request.form.get("estado", "")
+        guardar_cuotas(cuotas)
+        return redirect("/cuotas")
+
+    return render_template(
+        "formulario_cuota.html",
+        alumnos=cargar_alumnos(),
+        cuota=cuota
+    )
+
+
+@app.route("/eliminar_cuota/<int:id>")
+def eliminar_cuota(id):
+
+    if "usuario" not in session:
+        return redirect("/")
+
+    cuotas = cargar_cuotas()
+    cuotas = [c for c in cuotas if c["id"] != id]
+    guardar_cuotas(cuotas)
+    return redirect("/cuotas")
+
 # ===============================
 # LOGIN
 # ===============================
