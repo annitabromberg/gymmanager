@@ -1,82 +1,77 @@
 {% extends "base.html" %}
 
+{% block title %}Registrar Cuota{% endblock %}
+
 {% block content %}
+<div class="contenido">
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">Cuotas</span>
+            <h1>Registrar Cuota</h1>
+            <p>Ingresa los datos de la cuota para mantener el control de pagos.</p>
+        </div>
+    </div>
 
-<h1>Registrar Cuota</h1>
+    <form method="POST">
 
-<form method="POST">
+        <label>Alumno</label>
 
-    <label>Alumno</label>
+        <select name="alumno" required>
 
-    <select name="alumno" required>
+            <option value="">Seleccione un alumno</option>
 
-        <option value="">Seleccione un alumno</option>
+            {% for alumno in alumnos %}
 
-        {% for alumno in alumnos %}
+            <option value="{{ alumno.nombre }}" {% if cuota and cuota.alumno == alumno.nombre %}selected{% endif %}>
 
-        <option value="{{ alumno.nombre }}" {% if cuota and cuota.alumno == alumno.nombre %}selected{% endif %}>
+                {{ alumno.nombre }}
 
-            {{ alumno.nombre }}
+            </option>
 
-        </option>
+            {% endfor %}
 
-        {% endfor %}
+        </select>
 
-    </select>
+        <label>Plan</label>
 
-    <br><br>
+        <select name="plan" required>
 
-    <label>Plan</label>
+            <option {% if cuota and cuota.plan == 'Básico' %}selected{% endif %}>Básico</option>
+            <option {% if cuota and cuota.plan == 'Premium' %}selected{% endif %}>Premium</option>
+            <option {% if cuota and cuota.plan == 'VIP' %}selected{% endif %}>VIP</option>
 
-    <select name="plan" required>
+        </select>
 
-        <option {% if cuota and cuota.plan == 'Básico' %}selected{% endif %}>Básico</option>
-        <option {% if cuota and cuota.plan == 'Premium' %}selected{% endif %}>Premium</option>
-        <option {% if cuota and cuota.plan == 'VIP' %}selected{% endif %}>VIP</option>
+        <label>Monto</label>
 
-    </select>
+        <input
+            type="number"
+            name="monto"
+            placeholder="25000"
+            value="{{ cuota.monto if cuota else '' }}"
+            required>
 
-    <br><br>
+        <label>Fecha de vencimiento</label>
 
-    <label>Monto</label>
+        <input
+            type="date"
+            name="vencimiento"
+            value="{{ cuota.vencimiento if cuota else '' }}"
+            required>
 
-    <input
-        type="number"
-        name="monto"
-        placeholder="25000"
-        value="{{ cuota.monto if cuota else '' }}"
-        required>
+        <label>Estado</label>
 
-    <br><br>
+        <select name="estado">
+            <option {% if cuota and cuota.estado == 'Pendiente' %}selected{% endif %}>Pendiente</option>
+            <option {% if cuota and cuota.estado == 'Pagada' %}selected{% endif %}>Pagada</option>
+        </select>
 
-    <label>Fecha de vencimiento</label>
+        <div class="action-group" style="margin-top: 12px;">
+            <button class="agregar" type="submit">Guardar Cuota</button>
+            <a href="/cuotas"><button type="button">Cancelar</button></a>
+        </div>
 
-    <input
-        type="date"
-        name="vencimiento"
-        value="{{ cuota.vencimiento if cuota else '' }}"
-        required>
-
-    <br><br>
-
-    <label>Estado</label>
-
-    <select name="estado">
-
-        <option {% if cuota and cuota.estado == 'Pendiente' %}selected{% endif %}>Pendiente</option>
-
-        <option {% if cuota and cuota.estado == 'Pagada' %}selected{% endif %}>Pagada</option>
-
-    </select>
-
-    <br><br>
-
-    <button class="agregar">
-
-        Guardar Cuota
-
-    </button>
-
-</form>
+    </form>
+</div>
 
 {% endblock %}

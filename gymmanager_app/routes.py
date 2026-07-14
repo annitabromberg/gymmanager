@@ -28,6 +28,23 @@ def requiere_login():
     return None
 
 
+def calcular_imc(alumno):
+    """Calcula el IMC y devuelve el valor como número o None."""
+    try:
+        peso = float(alumno.get("peso", "") or 0)
+        altura = float(alumno.get("altura", "") or 0)
+
+        if altura > 3:
+            altura = altura / 100
+
+        if altura > 0:
+            return round(peso / (altura ** 2), 2)
+    except (ValueError, TypeError):
+        pass
+
+    return None
+
+
 @main.route("/", methods=["GET", "POST"])
 def login():
     """Muestra el login y valida las credenciales del usuario."""
@@ -85,6 +102,9 @@ def alumnos():
 
     if buscar:
         lista = [alumno for alumno in lista if buscar.lower() in alumno["nombre"].lower()]
+
+    for alumno in lista:
+        alumno["imc"] = calcular_imc(alumno)
 
     return render_template("alumnos.html", alumnos=lista, buscar=buscar)
 

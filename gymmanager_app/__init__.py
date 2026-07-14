@@ -18,6 +18,8 @@ def create_app():
         static_folder=str(STATIC_DIR),
     )
     app.secret_key = "gymmanager"
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
+    app.jinja_env.auto_reload = True
     app.register_blueprint(main)
     return app
 

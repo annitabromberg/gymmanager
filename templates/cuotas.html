@@ -2,41 +2,40 @@
 
 {% block content %}
 
+
 <div class="contenido">
 
-<h1>Gestión de Cuotas</h1>
+    <div class="page-header">
+        <div>
+            <span class="eyebrow">Cuotas</span>
+            <h1>Gestión de Cuotas</h1>
+            <p>Controla los pagos y estados de las cuotas de los alumnos.</p>
+        </div>
+    </div>
 
-<div class="barra-superior">
+    <div class="panel">
 
-    <form method="GET" action="/cuotas">
+        <div class="barra-superior">
 
-        <input
-            type="text"
-            name="buscar"
-            placeholder="Buscar alumno..."
-            value="{{ buscar }}">
+            <form method="GET" action="/cuotas">
 
-        <button type="submit" class="buscar">
+                <input
+                    type="text"
+                    name="buscar"
+                    placeholder="Buscar alumno..."
+                    value="{{ buscar }}">
 
-            Buscar
+                <button type="submit" class="buscar">Buscar</button>
 
-        </button>
+            </form>
 
-    </form>
+            <a href="/agregar_cuota" class="btn agregar">Nueva Cuota</a>
 
-    <a href="/agregar_cuota">
+        </div>
 
-        <button class="agregar">
+        <div class="table-wrapper">
 
-            Nueva Cuota
-
-        </button>
-
-    </a>
-
-</div>
-
-<table>
+            <table>
 
     <tr>
 
@@ -101,6 +100,11 @@
     {% endfor %}
 
 </table>
+
+
+        </div>
+
+    </div>
 
 </div>
 

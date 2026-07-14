@@ -11,7 +11,7 @@
         <a class="btn btn-primary" href="/agregar">Agregar alumno</a>
     </div>
 
-    <form method="GET" action="/alumnos">
+    <form class="search-form" method="GET" action="/alumnos">
         <input type="text" name="buscar" placeholder="Buscar alumno..." value="{{ buscar }}">
         <button class="buscar" type="submit">Buscar</button>
     </form>
@@ -26,6 +26,7 @@
                         <th>Teléfono</th>
                         <th>Plan</th>
                         <th>Estado</th>
+                        <th>IMC</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                             <td>{{ alumno.telefono }}</td>
                             <td>{{ alumno.plan }}</td>
                             <td>{{ alumno.estado }}</td>
+                            <td>{{ alumno.imc if alumno.imc is not none else '—' }}</td>
                             <td>
                                 <div class="action-group">
                                     <a href="/editar/{{ alumno.id }}"><button class="editar">Editar</button></a>
@@ -48,7 +50,7 @@
                         {% endfor %}
                     {% else %}
                         <tr>
-                            <td colspan="6">No hay alumnos registrados.</td>
+                            <td colspan="7">No hay alumnos registrados.</td>
                         </tr>
                     {% endif %}
                 </tbody>
