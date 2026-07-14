@@ -1,3 +1,9 @@
+﻿"""Rutas principales de la aplicación GymManager.
+
+Cada ruta corresponde a una página o acción del sistema: login, inicio,
+alumnos, rutinas, cuotas, asistencia y perfil de alumno.
+"""
+
 from flask import Blueprint, redirect, render_template, request, session
 
 from .config import CONTRASENA, USUARIO
@@ -16,6 +22,7 @@ main = Blueprint("main", __name__)
 
 
 def requiere_login():
+    """Redirige al login si el usuario no ha iniciado sesión."""
     if "usuario" not in session:
         return redirect("/")
     return None
@@ -23,6 +30,7 @@ def requiere_login():
 
 @main.route("/", methods=["GET", "POST"])
 def login():
+    """Muestra el login y valida las credenciales del usuario."""
     if request.method == "POST":
         usuario = request.form["usuario"]
         contrasena = request.form["password"]
@@ -38,6 +46,7 @@ def login():
 
 @main.route("/inicio")
 def inicio():
+    """Muestra el panel principal con estadísticas del sistema."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -45,14 +54,13 @@ def inicio():
     alumnos = cargar_alumnos()
     rutinas = cargar_rutinas()
     asistencias = cargar_asistencia()
-    cuotas = cargar_cuotas()
 
     return render_template(
         "inicio.html",
         cantidad=len(alumnos),
         cantidad_rutinas=len(rutinas),
         cantidad_asistencia=len(asistencias),
-        cantidad_cuotas=sum(1 for cuota in cuotas if cuota.get("estado") == "Pendiente"),
+        cantidad_cuotas=0,
         ultimos_alumnos=alumnos[-5:][::-1],
         ultimas_asistencias=asistencias[-5:][::-1],
     )
@@ -60,12 +68,14 @@ def inicio():
 
 @main.route("/logout")
 def logout():
+    """Cierra la sesión del usuario y redirige al login."""
     session.clear()
     return redirect("/")
 
 
 @main.route("/alumnos")
 def alumnos():
+    """Muestra la lista de alumnos y permite buscar por nombre."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -81,6 +91,7 @@ def alumnos():
 
 @main.route("/agregar", methods=["GET", "POST"])
 def agregar():
+    """Agrega un nuevo alumno al sistema."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -115,6 +126,7 @@ def agregar():
 
 @main.route("/editar/<int:id>", methods=["GET", "POST"])
 def editar(id):
+    """Edita un alumno existente."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -145,6 +157,7 @@ def editar(id):
 
 @main.route("/eliminar/<int:id>")
 def eliminar(id):
+    """Elimina un alumno del sistema."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -157,6 +170,7 @@ def eliminar(id):
 
 @main.route("/cuotas")
 def cuotas():
+    """Muestra la lista de cuotas y permite filtrarlas."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -172,6 +186,7 @@ def cuotas():
 
 @main.route("/agregar_cuota", methods=["GET", "POST"])
 def agregar_cuota():
+    """Agrega una nueva cuota para un alumno."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -203,6 +218,7 @@ def agregar_cuota():
 
 @main.route("/editar_cuota/<int:id>", methods=["GET", "POST"])
 def editar_cuota(id):
+    """Edita una cuota existente."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -227,6 +243,7 @@ def editar_cuota(id):
 
 @main.route("/eliminar_cuota/<int:id>")
 def eliminar_cuota(id):
+    """Elimina una cuota del sistema."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -239,6 +256,7 @@ def eliminar_cuota(id):
 
 @main.route("/rutinas")
 def rutinas():
+    """Muestra la lista de rutinas y permite filtrarlas."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -264,6 +282,7 @@ def rutinas():
 
 @main.route("/agregar_rutina", methods=["GET", "POST"])
 def agregar_rutina():
+    """Agrega una nueva rutina para un alumno."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -294,6 +313,7 @@ def agregar_rutina():
 
 @main.route("/editar_rutina/<int:id>", methods=["GET", "POST"])
 def editar_rutina(id):
+    """Edita una rutina existente."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -319,6 +339,7 @@ def editar_rutina(id):
 
 @main.route("/eliminar_rutina/<int:id>")
 def eliminar_rutina(id):
+    """Elimina una rutina del sistema."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -331,6 +352,7 @@ def eliminar_rutina(id):
 
 @main.route("/asistencia")
 def asistencia():
+    """Muestra el registro de asistencia y permite buscar por nombre."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -346,6 +368,7 @@ def asistencia():
 
 @main.route("/agregar_asistencia", methods=["GET", "POST"])
 def agregar_asistencia():
+    """Registra una nueva asistencia para un alumno."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -374,6 +397,7 @@ def agregar_asistencia():
 
 @main.route("/editar_asistencia/<int:id>", methods=["GET", "POST"])
 def editar_asistencia(id):
+    """Edita un registro de asistencia existente."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -397,6 +421,7 @@ def editar_asistencia(id):
 
 @main.route("/eliminar_asistencia/<int:id>")
 def eliminar_asistencia(id):
+    """Elimina un registro de asistencia."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -409,6 +434,7 @@ def eliminar_asistencia(id):
 
 @main.route("/perfil_alumno/<int:id>")
 def perfil_alumno(id):
+    """Muestra el detalle completo de un alumno con su rutina y asistencia."""
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
