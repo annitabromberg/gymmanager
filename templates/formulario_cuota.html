@@ -42,21 +42,13 @@
 
         </select>
 
-        <label>Monto</label>
 
-        <input
-            type="number"
-            name="monto"
-            placeholder="25000"
-            value="{{ cuota.monto if cuota else '' }}"
-            required>
-
-        <label>Fecha de vencimiento</label>
+        <label>Fecha de pago</label>
 
         <input
             type="date"
-            name="vencimiento"
-            value="{{ cuota.vencimiento if cuota else '' }}"
+            name="fecha_pago"
+            value="{{ cuota.fecha_pago if cuota else '' }}"
             required>
 
         <label>Estado</label>

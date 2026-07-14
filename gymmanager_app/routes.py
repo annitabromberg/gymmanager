@@ -17,6 +17,7 @@ from .data import (
     guardar_cuotas,
     guardar_rutinas,
 )
+from datetime import datetime, timedelta
 
 main = Blueprint("main", __name__)
 
@@ -207,6 +208,7 @@ def cuotas():
 @main.route("/agregar_cuota", methods=["GET", "POST"])
 def agregar_cuota():
     """Agrega una nueva cuota para un alumno."""
+
     redirect_result = requiere_login()
     if redirect_result is not None:
         return redirect_result
@@ -215,25 +217,51 @@ def agregar_cuota():
     alumnos = cargar_alumnos()
 
     if request.method == "POST":
+
+        # Generar ID
         if cuotas:
             nuevo_id = max(c["id"] for c in cuotas) + 1
         else:
             nuevo_id = 1
 
+        # Obtener el plan
+        plan = request.form["plan"]
+
+        # Asignar monto automáticamente
+        if plan == "Básico":
+            monto = 35000
+        elif plan == "Premium":
+            monto = 50000
+        else:
+            monto = 60000
+
+        # Obtener fecha de pago
+        fecha_pago = request.form["fecha_pago"]
+
+        # Calcular vencimiento (+30 días)
+        fecha = datetime.strptime(fecha_pago, "%Y-%m-%d")
+        vencimiento = fecha + timedelta(days=30)
+
+        # Crear la cuota
         nueva = {
             "id": nuevo_id,
             "alumno": request.form["alumno"],
-            "plan": request.form["plan"],
-            "monto": request.form["monto"],
-            "vencimiento": request.form["vencimiento"],
-            "estado": request.form["estado"],
+            "plan": plan,
+            "monto": monto,
+            "fecha_pago": fecha_pago,
+            "vencimiento": vencimiento.strftime("%Y-%m-%d"),
+            "estado": request.form["estado"]
         }
 
         cuotas.append(nueva)
         guardar_cuotas(cuotas)
+
         return redirect("/cuotas")
 
-    return render_template("formulario_cuota.html", alumnos=alumnos)
+    return render_template(
+        "formulario_cuota.html",
+        alumnos=alumnos
+    )
 
 
 @main.route("/editar_cuota/<int:id>", methods=["GET", "POST"])
