@@ -27,6 +27,7 @@
                         <th>Plan</th>
                         <th>Estado</th>
                         <th>IMC</th>
+                        <th>Estado físico</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -39,18 +40,52 @@
                             <td>{{ alumno.telefono }}</td>
                             <td>{{ alumno.plan }}</td>
                             <td>{{ alumno.estado }}</td>
-                            <td>{{ alumno.imc if alumno.imc is not none else '—' }}</td>
+                            <td>{{ alumno.imc if alumno.imc is not none else "—" }}</td>
+
+                            <td>
+                                {% if alumno.estado_imc == "Peso ideal" %}
+
+                                    <span class="estado verde">
+                                        {{ alumno.estado_imc }}
+                                    </span>
+
+                                {% elif alumno.estado_imc == "Sobrepeso" %}
+
+                                    <span class="estado rojo">
+                                        {{ alumno.estado_imc }}
+                                    </span>
+
+                                {% elif alumno.estado_imc == "Bajo peso" %}
+
+                                    <span class="estado amarillo">
+                                        {{ alumno.estado_imc }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="estado gris">
+                                        Sin datos
+                                    </span>
+
+                                {% endif %}
+                            </td>
+
                             <td>
                                 <div class="action-group">
-                                    <a href="/editar/{{ alumno.id }}"><button class="editar">Editar</button></a>
-                                    <a href="/eliminar/{{ alumno.id }}"><button class="eliminar">Eliminar</button></a>
+                                    <a href="/editar/{{ alumno.id }}">
+                                        <button class="editar">Editar</button>
+                                    </a>
+
+                                    <a href="/eliminar/{{ alumno.id }}">
+                                        <button class="eliminar">Eliminar</button>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
                         {% endfor %}
                     {% else %}
                         <tr>
-                            <td colspan="7">No hay alumnos registrados.</td>
+                            <td colspan="8">No hay alumnos registrados.</td>
                         </tr>
                     {% endif %}
                 </tbody>

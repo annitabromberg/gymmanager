@@ -90,7 +90,6 @@ def logout():
     session.clear()
     return redirect("/")
 
-
 @main.route("/alumnos")
 def alumnos():
     """Muestra la lista de alumnos y permite buscar por nombre."""
@@ -102,12 +101,36 @@ def alumnos():
     buscar = request.args.get("buscar", "")
 
     if buscar:
-        lista = [alumno for alumno in lista if buscar.lower() in alumno["nombre"].lower()]
+        lista = [
+            alumno for alumno in lista
+            if buscar.lower() in alumno["nombre"].lower()
+        ]
 
     for alumno in lista:
-        alumno["imc"] = calcular_imc(alumno)
 
-    return render_template("alumnos.html", alumnos=lista, buscar=buscar)
+        imc = calcular_imc(alumno)
+        alumno["imc"] = imc
+
+        try:
+            imc = float(imc)
+
+            if imc < 18.5:
+                alumno["estado_imc"] = "Bajo peso"
+
+            elif imc < 25:
+                alumno["estado_imc"] = "Peso ideal"
+
+            else:
+                alumno["estado_imc"] = "Sobrepeso"
+
+        except:
+            alumno["estado_imc"] = "-"
+
+    return render_template(
+        "alumnos.html",
+        alumnos=lista,
+        buscar=buscar
+    )
 
 
 @main.route("/agregar", methods=["GET", "POST"])

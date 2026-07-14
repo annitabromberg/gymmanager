@@ -726,3 +726,33 @@ hr {
         justify-content: center;
     }
 }
+/* ===============================
+   ESTADO FÍSICO DEL ALUMNO
+=============================== */
+
+.estado{
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: white;
+    display: inline-block;
+    min-width: 110px;
+    text-align: center;
+}
+
+.verde{
+    background: #28a745;
+}
+
+.rojo{
+    background: #dc3545;
+}
+
+.amarillo{
+    background: #ffc107;
+    color: #222;
+}
+
+.gris{
+    background: #6c757d;
+}
