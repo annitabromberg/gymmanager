@@ -1,20 +1,20 @@
 [
     {
         "id": 1,
-        "alumno": "Ana",
-        "lunes": "L1",
-        "martes": "L2",
-        "miercoles": "L3",
-        "jueves": "L4",
-        "viernes": "L5"
+        "alumno": "Josefina",
+        "lunes": "Hip trust 4x15 - Bulgaras 3x10 - Peso muerto 3x12 - Patada de gluteo 3x15",
+        "martes": "Descanso",
+        "miercoles": "Dorsalera 4x12 - Remo 4x10 - Remo a una mano 3x10 - triceps 4x12",
+        "jueves": "Descanso",
+        "viernes": "Sentadilla Hack 3x12 - Prensa 3x15 - Gemelos 3x12 - Cuadriceps 4x12"
     },
     {
         "id": 2,
         "alumno": "Sofi",
-        "lunes": "Gluteo",
-        "martes": "Espalda",
-        "miercoles": "",
-        "jueves": "Pecho y ticeps",
-        "viernes": "Gluteo y cardio"
+        "lunes": "Descanso",
+        "martes": "Press inclinado 3x10 - Peck Dek 4x12 - Vuelos frontales 4x10 - Vuelos laterales 4x10",
+        "miercoles": "Descanso",
+        "jueves": "Prensa 3x15 - Sentadilla Hack 3x12 - Femorales - Gemelos - Cuadriceps",
+        "viernes": "Cardio cinta inclinada 30 minutos"
     }
 ]
