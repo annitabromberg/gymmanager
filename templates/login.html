@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="auth-page">
+    <video class="auth-video" autoplay muted loop playsinline>
+        <source src="{{ url_for('static', filename='videos/static/videos/gym-video.mp4') }}" type="video/mp4">
+    </video>
+    <div class="auth-overlay"></div>
+
     <div class="login-card">
         <div class="brand">
             <div class="brand-icon">GF</div>
