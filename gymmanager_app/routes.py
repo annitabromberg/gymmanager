@@ -29,6 +29,44 @@ def requiere_login():
     return None
 
 
+def monto_por_plan(plan):
+    """Devuelve el monto asociado a un plan."""
+    return {
+        "Básico": 35000,
+        "Premium": 50000,
+        "VIP": 60000,
+    }.get(plan, 0)
+
+
+def calcular_vencimiento(fecha_pago):
+    """Calcula la fecha de vencimiento a partir de la fecha de pago."""
+    if not fecha_pago:
+        return ""
+
+    fecha = datetime.strptime(fecha_pago, "%Y-%m-%d")
+    return (fecha + timedelta(days=30)).strftime("%Y-%m-%d")
+
+
+def estado_cuota(cuota):
+    """Devuelve el estado visible de la cuota basado en la fecha de vencimiento."""
+    fecha_pago = cuota.get("fecha_pago", "")
+    vencimiento = cuota.get("vencimiento", "")
+    estado = cuota.get("estado", "Pendiente")
+
+    if not fecha_pago:
+        return "Pendiente"
+
+    try:
+        fecha_vencimiento = datetime.strptime(vencimiento, "%Y-%m-%d").date()
+    except (TypeError, ValueError):
+        return estado or "Pendiente"
+
+    if fecha_vencimiento < datetime.today().date():
+        return "Vencida"
+
+    return estado if estado in {"Pagada", "Pendiente"} else "Pagada"
+
+
 def calcular_imc(alumno):
     """Calcula el IMC y devuelve el valor como número o None."""
     try:
@@ -225,6 +263,9 @@ def cuotas():
     if buscar:
         lista = [cuota for cuota in lista if buscar.lower() in cuota["alumno"].lower()]
 
+    for cuota in lista:
+        cuota["estado"] = estado_cuota(cuota)
+
     return render_template("cuotas.html", cuotas=lista, buscar=buscar)
 
 
@@ -247,33 +288,20 @@ def agregar_cuota():
         else:
             nuevo_id = 1
 
-        # Obtener el plan
-        plan = request.form["plan"]
+        plan = request.form.get("plan", "Básico")
+        fecha_pago = request.form.get("fecha_pago", "")
+        estado = request.form.get("estado", "Pendiente")
 
-        # Asignar monto automáticamente
-        if plan == "Básico":
-            monto = 35000
-        elif plan == "Premium":
-            monto = 50000
-        else:
-            monto = 60000
-
-        # Obtener fecha de pago
-        fecha_pago = request.form["fecha_pago"]
-
-        # Calcular vencimiento (+30 días)
-        fecha = datetime.strptime(fecha_pago, "%Y-%m-%d")
-        vencimiento = fecha + timedelta(days=30)
-
-        # Crear la cuota
+        monto = monto_por_plan(plan)
+        vencimiento = calcular_vencimiento(fecha_pago)
         nueva = {
             "id": nuevo_id,
-            "alumno": request.form["alumno"],
+            "alumno": request.form.get("alumno", ""),
             "plan": plan,
             "monto": monto,
             "fecha_pago": fecha_pago,
-            "vencimiento": vencimiento.strftime("%Y-%m-%d"),
-            "estado": request.form["estado"]
+            "vencimiento": vencimiento,
+            "estado": estado,
         }
 
         cuotas.append(nueva)
@@ -283,7 +311,8 @@ def agregar_cuota():
 
     return render_template(
         "formulario_cuota.html",
-        alumnos=alumnos
+        alumnos=alumnos,
+        cuota=None,
     )
 
 
@@ -301,11 +330,16 @@ def editar_cuota(id):
         return redirect("/cuotas")
 
     if request.method == "POST":
-        cuota["alumno"] = request.form.get("alumno", "")
-        cuota["plan"] = request.form.get("plan", "")
-        cuota["monto"] = request.form.get("monto", "")
-        cuota["vencimiento"] = request.form.get("vencimiento", "")
-        cuota["estado"] = request.form.get("estado", "")
+        plan = request.form.get("plan", cuota.get("plan", "Básico"))
+        fecha_pago = request.form.get("fecha_pago", cuota.get("fecha_pago", ""))
+        estado = request.form.get("estado", cuota.get("estado", "Pendiente"))
+
+        cuota["alumno"] = request.form.get("alumno", cuota.get("alumno", ""))
+        cuota["plan"] = plan
+        cuota["monto"] = monto_por_plan(plan)
+        cuota["fecha_pago"] = fecha_pago
+        cuota["vencimiento"] = calcular_vencimiento(fecha_pago)
+        cuota["estado"] = estado
         guardar_cuotas(cuotas)
         return redirect("/cuotas")
 

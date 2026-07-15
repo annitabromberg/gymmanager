@@ -69,6 +69,32 @@
       border-radius: 10px;
     }
 
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .mockup {
+      background: #0b1220;
+      border: 1px solid rgba(244, 114, 182, 0.35);
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 140px;
+    }
+
+    .mockup .mini-title {
+      color: var(--accent2);
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .mockup p {
+      font-size: 0.94rem;
+      margin: 0;
+    }
+
     .code {
       background: #020617;
       padding: 12px 14px;
@@ -147,7 +173,63 @@
     </section>
 
     <section class="slide">
-      <h2>4. Paso a paso: cómo funciona la aplicación</h2>
+      <h2>4. Estructura del código, explicado para principiantes</h2>
+      <p>Si lo vemos como una casa, cada archivo cumple una función distinta:</p>
+      <div class="grid">
+        <div>
+          <h3><strong>app.py</strong></h3>
+          <p>Es el “motor” que prende la aplicación. Aquí se inicia la app y se define el puerto.</p>
+        </div>
+        <div>
+          <h3><strong>gymmanager_app/__init__.py</strong></h3>
+          <p>Es la “base” donde se crea la aplicación Flask y se conectan las páginas y archivos estáticos.</p>
+        </div>
+        <div>
+          <h3><strong>gymmanager_app/routes.py</strong></h3>
+          <p>Aquí están las rutas de la web, por ejemplo: login, inicio, alumnos, rutinas, asistencia.</p>
+        </div>
+        <div>
+          <h3><strong>gymmanager_app/data.py</strong></h3>
+          <p>Es el “archivo de almacenamiento”: lee y guarda la información de los alumnos y demás datos en JSON.</p>
+        </div>
+      </div>
+      <div class="note">Es como una organización por tareas: una parte arranca la app, otra define rutas, otra guarda los datos y otra muestra las páginas.</div>
+    </section>
+
+    <section class="slide">
+      <h2>5. Cómo se conecta todo</h2>
+      <p>El flujo de una petición con la app es muy simple:</p>
+      <ol>
+        <li>El usuario abre una URL en el navegador.</li>
+        <li>Flask identifica la ruta, por ejemplo /alumnos.</li>
+        <li>La ruta llama una función del código.</li>
+        <li>La función revisa datos, procesa información y luego devuelve una página HTML.</li>
+      </ol>
+      <div class="code">usuario abre /inicio -> Flask responde con la página correcta</div>
+    </section>
+
+    <section class="slide">
+      <h2>6. Capturas de pantalla de la interfaz</h2>
+      <p>Además de explicar el código, se pueden incluir ejemplos visuales de cómo se ve la aplicación en la práctica.</p>
+      <div class="mockup-grid">
+        <div class="mockup">
+          <div class="mini-title">Login</div>
+          <p>Vista inicial con video de fondo y formulario moderno.</p>
+        </div>
+        <div class="mockup">
+          <div class="mini-title">Inicio</div>
+          <p>Panel principal con estadísticas y acceso rápido.</p>
+        </div>
+        <div class="mockup">
+          <div class="mini-title">Alumnos</div>
+          <p>Listado con búsqueda, edición y gestión de registros.</p>
+        </div>
+      </div>
+      <div class="note">Estas capturas ayudan a que la presentación sea más clara, porque muestran la parte visual que el usuario ve en la web.</div>
+    </section>
+
+    <section class="slide">
+      <h2>7. Paso a paso: cómo funciona la aplicación</h2>
       <ol>
         <li>El usuario entra a la página.</li>
         <li>Se inicia el servidor con Flask.</li>
@@ -177,7 +259,7 @@
     </section>
 
     <section class="slide">
-      <h2>7. ¿Qué hace cada parte del proyecto?</h2>
+      <h2>8. ¿Qué hace cada parte del proyecto?</h2>
       <div class="grid">
         <div>
           <h3>Flask / rutas</h3>
@@ -199,7 +281,7 @@
     </section>
 
     <section class="slide">
-      <h2>8. Cómo se ve el flujo de la app</h2>
+      <h2>9. Cómo se ve el flujo de la app</h2>
       <p>Un ejemplo de uso real:</p>
       <ol>
         <li>Se agrega un alumno con nombre, edad, objetivo y plan.</li>
@@ -211,7 +293,7 @@
     </section>
 
     <section class="slide">
-      <h2>9. ¿Por qué esta app es útil?</h2>
+      <h2>10. ¿Por qué esta app es útil?</h2>
       <ul>
         <li>Ayuda a organizar información de forma rápida</li>
         <li>Reduce errores manuales</li>
@@ -221,7 +303,7 @@
     </section>
 
     <section class="slide">
-      <h2>10. Lo más importante para aprender</h2>
+      <h2>11. Lo más importante para aprender</h2>
       <p>La idea principal no es solo “hacer una app”, sino entender estos conceptos:</p>
       <ul>
         <li>Una página web se compone de front-end y back-end</li>
@@ -232,7 +314,7 @@
     </section>
 
     <section class="slide">
-      <h2>11. Conclusión</h2>
+      <h2>12. Conclusión</h2>
       <p>GymManager es una aplicación web simple, pero con una gran idea: organizar la gestión de un gimnasio usando tecnología accesible.</p>
       <p>Para principiantes, esta app sirve como ejemplo perfecto de cómo una idea real puede convertirse en una solución digital paso a paso.</p>
     </section>

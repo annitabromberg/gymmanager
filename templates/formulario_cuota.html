@@ -51,11 +51,20 @@
             value="{{ cuota.fecha_pago if cuota else '' }}"
             required>
 
+        <label>Vencimiento</label>
+
+        <input
+            type="date"
+            name="vencimiento"
+            value="{{ cuota.vencimiento if cuota else '' }}"
+            readonly>
+
         <label>Estado</label>
 
         <select name="estado">
             <option {% if cuota and cuota.estado == 'Pendiente' %}selected{% endif %}>Pendiente</option>
             <option {% if cuota and cuota.estado == 'Pagada' %}selected{% endif %}>Pagada</option>
+            <option {% if cuota and cuota.estado == 'Vencida' %}selected{% endif %}>Vencida</option>
         </select>
 
         <div class="action-group" style="margin-top: 12px;">

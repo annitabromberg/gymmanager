@@ -3,10 +3,10 @@
         "id": 3,
         "alumno": "Josefina",
         "plan": "Premium",
-        "monto": 50000,
+        "monto": "",
         "fecha_pago": "2026-07-14",
-        "vencimiento": "2026-08-13",
-        "estado": "Pagada"
+        "vencimiento": "",
+        "estado": "Pendiente"
     },
     {
         "id": 4,

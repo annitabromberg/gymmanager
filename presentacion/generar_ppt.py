@@ -124,7 +124,67 @@ for i, line in enumerate([
 slide = prs.slides.add_slide(prs.slide_layouts[1])
 slide.background.fill.solid()
 slide.background.fill.fore_color.rgb = bg
-slide.shapes.title.text = "4. Paso a paso: cómo funciona"
+slide.shapes.title.text = "4. Estructura del código"
+slide.shapes.title.text_frame.paragraphs[0].font.color.rgb = accent
+
+body = slide.shapes.placeholders[1].text_frame
+body.clear()
+for i, line in enumerate([
+    "app.py: prende la aplicación y define el puerto.",
+    "gymmanager_app/__init__.py: crea la instancia principal de Flask.",
+    "gymmanager_app/routes.py: define rutas como login, inicio, alumnos y asistencia.",
+    "gymmanager_app/data.py: lee y guarda información en archivos JSON.",
+    "Todo está separado por tareas para que sea más fácil de entender y mantener.",
+]):
+    p = body.paragraphs[0] if i == 0 else body.add_paragraph()
+    p.text = line
+    p.font.size = Pt(19)
+    p.font.color.rgb = text
+
+# ----- Diapositiva 5 -----
+slide = prs.slides.add_slide(prs.slide_layouts[1])
+slide.background.fill.solid()
+slide.background.fill.fore_color.rgb = bg
+slide.shapes.title.text = "5. Cómo se conecta todo"
+slide.shapes.title.text_frame.paragraphs[0].font.color.rgb = accent
+
+body = slide.shapes.placeholders[1].text_frame
+body.clear()
+for i, line in enumerate([
+    "1) El usuario abre una URL en el navegador.",
+    "2) Flask reconoce la ruta pedida.",
+    "3) La ruta llama a una función del código.",
+    "4) Esa función consulta o guarda información y devuelve una página HTML.",
+]):
+    p = body.paragraphs[0] if i == 0 else body.add_paragraph()
+    p.text = line
+    p.font.size = Pt(19)
+    p.font.color.rgb = text
+
+# ----- Diapositiva 6 -----
+slide = prs.slides.add_slide(prs.slide_layouts[1])
+slide.background.fill.solid()
+slide.background.fill.fore_color.rgb = bg
+slide.shapes.title.text = "6. Capturas de pantalla de la interfaz"
+slide.shapes.title.text_frame.paragraphs[0].font.color.rgb = accent
+
+body = slide.shapes.placeholders[1].text_frame
+body.clear()
+for i, line in enumerate([
+    "Se pueden incluir capturas del login, la pantalla de inicio y la lista de alumnos.",
+    "Estas imágenes ayudan a que la presentación sea más visual y fácil de entender.",
+    "Además, muestran cómo se ve la app desde la perspectiva del usuario final.",
+]):
+    p = body.paragraphs[0] if i == 0 else body.add_paragraph()
+    p.text = line
+    p.font.size = Pt(19)
+    p.font.color.rgb = text
+
+# ----- Diapositiva 7 -----
+slide = prs.slides.add_slide(prs.slide_layouts[1])
+slide.background.fill.solid()
+slide.background.fill.fore_color.rgb = bg
+slide.shapes.title.text = "7. Paso a paso: cómo funciona"
 slide.shapes.title.text_frame.paragraphs[0].font.color.rgb = accent
 
 body = slide.shapes.placeholders[1].text_frame
@@ -140,7 +200,7 @@ for i, line in enumerate([
     p.font.size = Pt(20)
     p.font.color.rgb = text
 
-# ----- Diapositiva 5 -----
+# ----- Diapositiva 8 -----
 slide = prs.slides.add_slide(prs.slide_layouts[1])
 slide.background.fill.solid()
 slide.background.fill.fore_color.rgb = bg
