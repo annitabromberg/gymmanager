@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentación GymManager para principiantes</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --accent: #f472b6;
+      --accent2: #f9a8d4;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --card: #1f2937;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e1b4b);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .slide {
+      background: rgba(17, 24, 39, 0.92);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 34px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    h1, h2, h3 { margin-top: 0; }
+    h1 { font-size: 2.2rem; color: var(--accent2); }
+    h2 { font-size: 1.7rem; color: #fff; }
+    h3 { color: var(--accent2); }
+    p, li { color: var(--muted); line-height: 1.7; font-size: 1.05rem; }
+    ul { padding-left: 20px; }
+    .pill {
+      display: inline-block;
+      background: rgba(244, 114, 182, 0.18);
+      color: var(--accent2);
+      border: 1px solid rgba(244, 114, 182, 0.4);
+      border-radius: 999px;
+      padding: 6px 12px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .note {
+      background: rgba(244, 114, 182, 0.12);
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      border-radius: 10px;
+    }
+
+    .code {
+      background: #020617;
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: #fef08a;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: auto;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .slide { padding: 22px; }
+      h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="slide">
+      <div class="pill">Fundamentos de Informática</div>
+      <h1>GymManager: una aplicación web para gestionar un gimnasio</h1>
+      <p>Presentación realizada por: Anna Bromberg, María Josefina Velázquez Paz y Ángela Romero.</p>
+      <p>Esta presentación explica, paso a paso y con lenguaje sencillo, cómo se construyó esta aplicación web y para qué sirve.</p>
+      <div class="note">Objetivo: explicar la idea sin asumir que el público ya sabe programar.</div>
+    </section>
+
+    <section class="slide">
+      <h2>1. ¿De qué se trata la aplicación?</h2>
+      <p>GymManager es una aplicación web pensada para ayudar a un gimnasio a organizar su información. Fue desarrollada como proyecto para la asignatura Fundamentos de Informática.</p>
+      <div class="grid">
+        <div>
+          <h3>Lo que puede hacer</h3>
+          <ul>
+            <li>Registrar alumnos</li>
+            <li>Guardar rutinas</li>
+            <li>Controlar asistencia</li>
+            <li>Gestionar cuotas</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Idea sencilla</h3>
+          <p>Si una persona quiere administrar un gimnasio, esta app sirve como una “mesa de trabajo digital” para guardar y consultar datos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>2. ¿Qué herramientas se usaron?</h2>
+      <ul>
+        <li><strong>Python</strong>: lenguaje principal para crear la lógica.</li>
+        <li><strong>Flask</strong>: framework para construir páginas web.</li>
+        <li><strong>HTML</strong>: define la estructura de las páginas.</li>
+        <li><strong>CSS</strong>: cambia el diseño y la apariencia visual.</li>
+        <li><strong>JSON</strong>: guarda la información de alumnos, rutinas y asistencia.</li>
+      </ul>
+      <p>En otras palabras: se usó una combinación de lenguaje, diseño y almacenamiento de datos.</p>
+    </section>
+
+    <section class="slide">
+      <h2>3. ¿Cómo se organizó el proyecto?</h2>
+      <div class="grid">
+        <div>
+          <h3>Carpetas importantes</h3>
+          <ul>
+            <li><strong>app.py</strong>: inicia la aplicación.</li>
+            <li><strong>templates/</strong>: contiene las páginas HTML.</li>
+            <li><strong>static/</strong>: contiene imágenes, videos y estilos CSS.</li>
+            <li><strong>gymmanager_app/</strong>: agrupa la lógica principal.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>La idea</h3>
+          <p>La app está separada en partes. Cada parte cumple una tarea específica.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>4. Paso a paso: cómo funciona la aplicación</h2>
+      <ol>
+        <li>El usuario entra a la página.</li>
+        <li>Se inicia el servidor con Flask.</li>
+        <li>La aplicación muestra una pantalla de login.</li>
+        <li>Si el usuario escribe bien sus credenciales, entra al sistema.</li>
+        <li>Desde ahí puede ver el inicio, alumnos, rutinas y asistencia.</li>
+      </ol>
+      <div class="note">Pensalo como una recepción de un gimnasio: primero pasa por la puerta de entrada, luego accede al control principal.</div>
+    </section>
+
+    <section class="slide">
+      <h2>5. El login: la primera puerta</h2>
+      <p>Cuando una persona se conecta, el sistema valida si el usuario y la contraseña son correctos.</p>
+      <div class="code">usuario = "admin"<br/>password = "1234"</div>
+      <p>Si los datos coinciden, se “abre” la sesión y el usuario puede navegar dentro de la aplicación.</p>
+    </section>
+
+    <section class="slide">
+      <h2>6. ¿Qué pasa con los datos?</h2>
+      <p>La información no se guarda en una base de datos grande como MySQL, sino en archivos JSON.</p>
+      <ul>
+        <li><strong>alumnos.json</strong>: lista de alumnos</li>
+        <li><strong>rutinas.json</strong>: rutinas de entrenamiento</li>
+        <li><strong>asistencia.json</strong>: control de presencia</li>
+      </ul>
+      <p>JSON es una forma sencilla de guardar información en formato parecido a una tabla o lista.</p>
+    </section>
+
+    <section class="slide">
+      <h2>7. ¿Qué hace cada parte del proyecto?</h2>
+      <div class="grid">
+        <div>
+          <h3>Flask / rutas</h3>
+          <p>Define qué ocurre cuando se visita una URL como /inicio o /alumnos.</p>
+        </div>
+        <div>
+          <h3>Templates</h3>
+          <p>Son las páginas HTML que muestran el contenido al usuario.</p>
+        </div>
+        <div>
+          <h3>CSS</h3>
+          <p>Hace que la aplicación se vea bonita y moderna.</p>
+        </div>
+        <div>
+          <h3>JSON</h3>
+          <p>Guarda los registros que la app necesita.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>8. Cómo se ve el flujo de la app</h2>
+      <p>Un ejemplo de uso real:</p>
+      <ol>
+        <li>Se agrega un alumno con nombre, edad, objetivo y plan.</li>
+        <li>Ese alumno queda guardado en el archivo JSON.</li>
+        <li>Luego, desde la interfaz, se puede buscar, editar o eliminar.</li>
+        <li>La aplicación vuelve a mostrar la información actualizada.</li>
+      </ol>
+      <div class="note">Esto se llama flujo de datos: la información entra, se procesa y vuelve a mostrarse al usuario.</div>
+    </section>
+
+    <section class="slide">
+      <h2>9. ¿Por qué esta app es útil?</h2>
+      <ul>
+        <li>Ayuda a organizar información de forma rápida</li>
+        <li>Reduce errores manuales</li>
+        <li>Facilita la administración de un gimnasio</li>
+        <li>Sirve como base para aprender proyectos web reales</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>10. Lo más importante para aprender</h2>
+      <p>La idea principal no es solo “hacer una app”, sino entender estos conceptos:</p>
+      <ul>
+        <li>Una página web se compone de front-end y back-end</li>
+        <li>El navegador pide información y el servidor responde</li>
+        <li>Los datos pueden guardarse en archivos o en bases de datos</li>
+        <li>El diseño ayuda a que una app sea fácil de usar</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>11. Conclusión</h2>
+      <p>GymManager es una aplicación web simple, pero con una gran idea: organizar la gestión de un gimnasio usando tecnología accesible.</p>
+      <p>Para principiantes, esta app sirve como ejemplo perfecto de cómo una idea real puede convertirse en una solución digital paso a paso.</p>
+    </section>
+  </div>
+</body>
+</html>
