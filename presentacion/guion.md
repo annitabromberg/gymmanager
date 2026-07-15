@@ -23,10 +23,17 @@ Se usaron varias herramientas:
 
 ## 4. ¿Cómo se organiza el proyecto?
 
-- app.py: inicia la aplicación
-- templates/: páginas de la web
-- static/: estilo, videos e imágenes
-- gymmanager_app/: lógica principal
+La app está organizada en varias carpetas para separar responsabilidades:
+
+- app.py: archivo principal que inicia la aplicación y levanta el servidor.
+- gymmanager_app/__init__.py: crea la instancia de Flask.
+- gymmanager_app/routes.py: define las rutas del sitio, como login, alumnos, rutinas y asistencia.
+- gymmanager_app/data.py: contiene la lógica para leer y guardar información en archivos JSON.
+- gymmanager_app/config.py: guarda la configuración general de la aplicación.
+- templates/: almacena las páginas HTML que se muestran al usuario.
+- static/: guarda CSS, archivos multimedia y recursos visuales.
+
+Esta división hace que el código sea más ordenado y fácil de mantener, porque cada parte se encarga de una tarea específica.
 
 ## 5. Flujo simple
 

@@ -110,10 +110,11 @@ slide.shapes.title.text_frame.paragraphs[0].font.color.rgb = accent
 body = slide.shapes.placeholders[1].text_frame
 body.clear()
 for i, line in enumerate([
-    "app.py: inicia la aplicación.",
-    "templates/: contiene las páginas HTML.",
-    "static/: contiene CSS, videos e imágenes.",
-    "gymmanager_app/: guarda la lógica y las rutas de la app.",
+    "app.py: inicia la aplicación y levanta el servidor.",
+    "gymmanager_app/: guarda la lógica principal del proyecto.",
+    "templates/: contiene las páginas HTML que se muestran al usuario.",
+    "static/: guarda estilos, videos e imágenes.",
+    "Todo está estructurado para separar la interfaz, la lógica y los datos.",
 ]):
     p = body.paragraphs[0] if i == 0 else body.add_paragraph()
     p.text = line
@@ -130,15 +131,16 @@ slide.shapes.title.text_frame.paragraphs[0].font.color.rgb = accent
 body = slide.shapes.placeholders[1].text_frame
 body.clear()
 for i, line in enumerate([
-    "app.py: prende la aplicación y define el puerto.",
+    "app.py: archivo principal que arranca la app.",
     "gymmanager_app/__init__.py: crea la instancia principal de Flask.",
-    "gymmanager_app/routes.py: define rutas como login, inicio, alumnos y asistencia.",
+    "gymmanager_app/config.py: guarda la configuración general del proyecto.",
+    "gymmanager_app/routes.py: define las rutas de login, inicio, alumnos y asistencia.",
     "gymmanager_app/data.py: lee y guarda información en archivos JSON.",
-    "Todo está separado por tareas para que sea más fácil de entender y mantener.",
+    "La separación por archivos ayuda a mantener el código más ordenado y fácil de entender.",
 ]):
     p = body.paragraphs[0] if i == 0 else body.add_paragraph()
     p.text = line
-    p.font.size = Pt(19)
+    p.font.size = Pt(18)
     p.font.color.rgb = text
 
 # ----- Diapositiva 5 -----
