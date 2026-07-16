@@ -16,5 +16,14 @@
         "fecha_pago": "2026-07-12",
         "vencimiento": "2026-08-11",
         "estado": "Pagada"
+    },
+    {
+        "id": 5,
+        "alumno": "Juan Martinez",
+        "plan": "Premium",
+        "monto": 50000,
+        "fecha_pago": "2026-06-15",
+        "vencimiento": "2026-07-15",
+        "estado": "Pagada"
     }
 ]
