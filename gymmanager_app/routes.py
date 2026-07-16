@@ -61,6 +61,9 @@ def estado_cuota(cuota):
     except (TypeError, ValueError):
         return estado or "Pendiente"
 
+    if estado == "Vencida":
+        return "Vencida"
+
     if fecha_vencimiento < datetime.today().date():
         return "Vencida"
 

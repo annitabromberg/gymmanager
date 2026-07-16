@@ -64,7 +64,6 @@
         <select name="estado">
             <option {% if cuota and cuota.estado == 'Pendiente' %}selected{% endif %}>Pendiente</option>
             <option {% if cuota and cuota.estado == 'Pagada' %}selected{% endif %}>Pagada</option>
-            <option {% if cuota and cuota.estado == 'Vencida' %}selected{% endif %}>Vencida</option>
         </select>
 
         <div class="action-group" style="margin-top: 12px;">

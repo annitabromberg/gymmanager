@@ -22,6 +22,17 @@ def test_cuotas_renderiza_su_contenido():
     assert b"Nueva Cuota" in response.data
 
 
+def test_formulario_cuota_no_muestra_opcion_vencida():
+    client = app_module.app.test_client()
+    with client.session_transaction() as sess:
+        sess["usuario"] = "admin"
+
+    response = client.get("/agregar_cuota")
+
+    assert response.status_code == 200
+    assert b"Vencida" not in response.data
+
+
 def test_agregar_cuota_guarda_en_json(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
 
