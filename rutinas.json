@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "alumno": "Josefina",
+        "alumno": "Josefina Velázquez",
         "lunes": "Hip trust 4x15 - Bulgaras 3x10 - Peso muerto 3x12 - Patada de gluteo 3x15",
         "martes": "Descanso",
         "miercoles": "Dorsalera 4x12 - Remo 4x10 - Remo a una mano 3x10 - triceps 4x12",
@@ -10,7 +10,7 @@
     },
     {
         "id": 2,
-        "alumno": "Sofi",
+        "alumno": "Sofia Perez",
         "lunes": "Descanso",
         "martes": "Press inclinado 3x10 - Peck Dek 4x12 - Vuelos frontales 4x10 - Vuelos laterales 4x10",
         "miercoles": "Descanso",

@@ -1,9 +1,9 @@
 [
     {
         "id": 3,
-        "nombre": "Josefina",
+        "nombre": "Josefina Velázquez",
         "edad": "19",
-        "dni": "24529094",
+        "dni": "48411623",
         "telefono": "542995167071",
         "email": "majo.velazquezpaz@gmail.com",
         "altura": "160",
@@ -14,28 +14,41 @@
     },
     {
         "id": 4,
-        "nombre": "pepito",
+        "nombre": "Nacho Paz",
         "edad": "22",
         "dni": "48411623",
-        "telefono": "542995167071",
+        "telefono": "542987316072",
         "email": "majo.velazquezpaz@gmail.com",
         "altura": "180",
         "peso": "70",
-        "objetivo": "culote",
-        "plan": "VIP",
+        "objetivo": "pecho",
+        "plan": "Premium",
         "estado": "Activo"
     },
     {
         "id": 5,
-        "nombre": "Sofi",
-        "edad": "23",
+        "nombre": "Sofia Perez",
+        "edad": "18",
         "dni": "48411623",
-        "telefono": "542995167071",
+        "telefono": "542996748893",
         "email": "mariajosefinavelazquezpaz0@gmail.com",
         "altura": "160",
-        "peso": "55",
-        "objetivo": "culote",
+        "peso": "45",
+        "objetivo": "Piernas",
         "plan": "VIP",
+        "estado": "Inactivo"
+    },
+    {
+        "id": 6,
+        "nombre": "Juan Martinez",
+        "edad": "22",
+        "dni": "45556234",
+        "telefono": "542984903331",
+        "email": "josefina.velazquez.paz@gmail.com",
+        "altura": "180",
+        "peso": "90",
+        "objetivo": "brazos",
+        "plan": "Básico",
         "estado": "Activo"
     }
 ]

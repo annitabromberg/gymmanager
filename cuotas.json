@@ -1,16 +1,16 @@
 [
     {
         "id": 3,
-        "alumno": "Josefina",
+        "alumno": "Josefina Velázquez",
         "plan": "Premium",
-        "monto": "",
+        "monto": 50000,
         "fecha_pago": "2026-07-14",
-        "vencimiento": "",
+        "vencimiento": "2026-08-13",
         "estado": "Pendiente"
     },
     {
         "id": 4,
-        "alumno": "pepito",
+        "alumno": "Nacho Paz",
         "plan": "Básico",
         "monto": 35000,
         "fecha_pago": "2026-07-12",
