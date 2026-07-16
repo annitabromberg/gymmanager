@@ -2,8 +2,8 @@
     {
         "id": 3,
         "alumno": "Josefina Velázquez",
-        "plan": "Premium",
-        "monto": 50000,
+        "plan": "Básico",
+        "monto": 35000,
         "fecha_pago": "2026-07-14",
         "vencimiento": "2026-08-13",
         "estado": "Pagada"
@@ -11,8 +11,8 @@
     {
         "id": 4,
         "alumno": "Nacho Paz",
-        "plan": "Básico",
-        "monto": 35000,
+        "plan": "Premium",
+        "monto": 50000,
         "fecha_pago": "2026-07-12",
         "vencimiento": "2026-08-11",
         "estado": "Pagada"
@@ -20,10 +20,19 @@
     {
         "id": 5,
         "alumno": "Juan Martinez",
-        "plan": "Premium",
-        "monto": 50000,
+        "plan": "Básico",
+        "monto": 35000,
         "fecha_pago": "2026-06-15",
         "vencimiento": "2026-07-15",
         "estado": "Pagada"
+    },
+    {
+        "id": 6,
+        "alumno": "Sofia Perez",
+        "plan": "VIP",
+        "monto": 60000,
+        "fecha_pago": "2026-07-15",
+        "vencimiento": "2026-08-14",
+        "estado": "Pendiente"
     }
 ]
