@@ -45,8 +45,16 @@ def guardar_rutinas(rutinas):
 
 
 def cargar_asistencia():
-    """Devuelve la lista de asistencias almacenada en el archivo JSON."""
-    return cargar_json(asistencia_file(), [])
+    """Devuelve la lista de asistencias almacenada en el archivo JSON ordenada de más nueva a más vieja."""
+    asistencias = cargar_json(asistencia_file(), [])
+    return sorted(
+        asistencias,
+        key=lambda registro: (
+            registro.get("fecha", ""),
+            registro.get("hora", ""),
+        ),
+        reverse=True,
+    )
 
 
 def guardar_asistencia(asistencia):

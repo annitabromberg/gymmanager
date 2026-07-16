@@ -127,7 +127,7 @@ def inicio():
         cantidad_asistencia=len(asistencias),
         cantidad_cuotas=cantidad_cuotas,
         ultimos_alumnos=alumnos[-5:][::-1],
-        ultimas_asistencias=asistencias[-5:][::-1],
+        ultimas_asistencias=asistencias[:5],
     )
 
 

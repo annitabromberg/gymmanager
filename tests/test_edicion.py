@@ -10,6 +10,38 @@ sys.path.insert(0, str(ROOT))
 app_module = importlib.import_module("gymmanager_app")
 
 
+def test_asistencia_se_muestra_de_mas_nueva_a_mas_vieja(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    with open(tmp_path / "asistencia.json", "w", encoding="utf-8") as f:
+        json.dump([
+            {
+                "id": 1,
+                "nombre": "Ana",
+                "fecha": "2026-07-01",
+                "hora": "09:00",
+                "estado": "Presente",
+            },
+            {
+                "id": 2,
+                "nombre": "Ana",
+                "fecha": "2026-07-10",
+                "hora": "11:00",
+                "estado": "Presente",
+            },
+        ], f)
+
+    client = app_module.app.test_client()
+    with client.session_transaction() as sess:
+        sess["usuario"] = "admin"
+
+    response = client.get("/asistencia")
+    html = response.get_data(as_text=True)
+
+    assert response.status_code == 200
+    assert html.index("2026-07-10") < html.index("2026-07-01")
+
+
 def test_editar_alumno_guarda_todos_los_campos(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     with open(tmp_path / "alumnos.json", "w", encoding="utf-8") as f:
