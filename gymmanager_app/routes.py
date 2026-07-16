@@ -110,13 +110,19 @@ def inicio():
     alumnos = cargar_alumnos()
     rutinas = cargar_rutinas()
     asistencias = cargar_asistencia()
+    cuotas = cargar_cuotas()
+    cantidad_cuotas = sum(
+        1
+        for cuota in cuotas
+        if estado_cuota(cuota) == "Pendiente"
+    )
 
     return render_template(
         "inicio.html",
         cantidad=len(alumnos),
         cantidad_rutinas=len(rutinas),
         cantidad_asistencia=len(asistencias),
-        cantidad_cuotas=0,
+        cantidad_cuotas=cantidad_cuotas,
         ultimos_alumnos=alumnos[-5:][::-1],
         ultimas_asistencias=asistencias[-5:][::-1],
     )
