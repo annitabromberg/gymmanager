@@ -26,12 +26,5 @@
         "fecha": "2026-07-16",
         "hora": "16:00",
         "estado": "Presente"
-    },
-    {
-        "id": 5,
-        "nombre": "Juan Martinez",
-        "fecha": "2026-07-15",
-        "hora": "16:00",
-        "estado": "Ausente"
     }
 ]
