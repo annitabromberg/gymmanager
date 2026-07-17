@@ -20,7 +20,7 @@ from .data import (
 from datetime import datetime, timedelta
 
 main = Blueprint("main", __name__)
-
+"""Main contiene rutas aplicación, codigo lo trae a archivo"""
 
 def requiere_login():
     """Redirige al login si el usuario no ha iniciado sesión."""

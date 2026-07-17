@@ -7,9 +7,10 @@ las constantes generales usadas por el resto de módulos.
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+"""Esta línea obtiene la carpeta principal del proyecto."""
 STATIC_DIR = BASE_DIR / "static"
 TEMPLATES_DIR = BASE_DIR / "templates"
-
+"""Estas variables guardan las rutas de esas carpetas."""
 
 def data_dir():
     """Devuelve la carpeta base desde donde se leen los archivos de datos."""
